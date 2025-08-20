@@ -1,0 +1,126 @@
+[gd_scene load_steps=12 format=3 uid="uid://d3r6m7xd7vims"]
+
+[ext_resource type="Script" uid="uid://cwpn8o4fbdj3v" path="res://Scripts/player/PlayerController.gd" id="1_p3564"]
+[ext_resource type="SpriteFrames" uid="uid://b502yx7rjvh8v" path="res://Assets/Player/player_sprites.tres" id="2_sweqy"]
+[ext_resource type="Script" uid="uid://b7qcinx3dt6jl" path="res://Scripts/character/CharacterAnimation.gd" id="3_gw0hm"]
+[ext_resource type="Script" uid="uid://oxuft7r1mric" path="res://Scripts/character/CharacterStat.gd" id="4_rrlj6"]
+
+[sub_resource type="Animation" id="Animation_n7ghd"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"attack"]
+}
+
+[sub_resource type="Animation" id="Animation_1txc5"]
+resource_name = "fall"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"fall"]
+}
+
+[sub_resource type="Animation" id="Animation_sweqy"]
+resource_name = "idle"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"idle"]
+}
+
+[sub_resource type="Animation" id="Animation_dw050"]
+resource_name = "jump"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"jump"]
+}
+
+[sub_resource type="Animation" id="Animation_2hs0m"]
+resource_name = "run"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"run"]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_n7ghd"]
+_data = {
+&"RESET": SubResource("Animation_n7ghd"),
+&"fall": SubResource("Animation_1txc5"),
+&"idle": SubResource("Animation_sweqy"),
+&"jump": SubResource("Animation_dw050"),
+&"run": SubResource("Animation_2hs0m")
+}
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_sweqy"]
+radius = 5.0
+height = 18.0
+
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("CoyoteTimerCoyoteTimer", "JumpBufferTimer", "Anim", "ChStat") groups=["Player"]]
+collision_mask = 32
+script = ExtResource("1_p3564")
+CoyoteTimerCoyoteTimer = NodePath("CoyoteTimer")
+JumpBufferTimer = NodePath("JumpBufferTimer")
+Anim = NodePath("Anim")
+ChStat = NodePath("PlayerStat")
+
+[node name="Sprite" type="AnimatedSprite2D" parent="."]
+sprite_frames = ExtResource("2_sweqy")
+animation = &"attack"
+
+[node name="Anim" type="AnimationPlayer" parent="." node_paths=PackedStringArray("Sprite")]
+callback_mode_process = 0
+libraries = {
+&"": SubResource("AnimationLibrary_n7ghd")
+}
+script = ExtResource("3_gw0hm")
+Sprite = NodePath("../Sprite")
+
+[node name="CoyoteTimer" type="Timer" parent="."]
+
+[node name="JumpBufferTimer" type="Timer" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_sweqy")
+
+[node name="PlayerStat" type="Node" parent="."]
+script = ExtResource("4_rrlj6")

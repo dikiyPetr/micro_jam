@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=4 uid="uid://35wocp3gdpku"]
+
+[ext_resource type="PackedScene" uid="uid://d3r6m7xd7vims" path="res://Prefabs/Actors/player.tscn" id="1_8mlfl"]
+[ext_resource type="TileSet" uid="uid://ca86b5hsnno0i" path="res://Tiles/new_tile_set.tres" id="2_bv4ae"]
+[ext_resource type="PackedScene" uid="uid://bn5ojxqxxv4k1" path="res://UI/pause_ui.tscn" id="3_bv4ae"]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="Player" parent="." instance=ExtResource("1_8mlfl")]
+
+[node name="Camera2D" type="Camera2D" parent="Player"]
+position = Vector2(166, -47)
+scale = Vector2(6.92, 1)
+zoom = Vector2(2, 2)
+
+[node name="TileMapLayer" type="TileMapLayer" parent="."]
+tile_map_data = PackedByteArray("AAD8/wMABAAaABMAAAD9/wMABAAbABMAAAD+/wMABAAbABMAAAD//wMABAAdABMAAAAAAAMABAAdABMAAAABAAMABAAdABMAAAACAAMABAAbABMAAAADAAMABAAeABMAAAAEAAMABAAeABMAAAAFAAMABAAeABMAAAAGAAMABAAeABMAAAAHAAMABAAeABMAAAAIAAMABAAeABMAAAAJAAMABAAeABMAAAAKAAMABAAeABMAAAALAAMABAAeABMAAAAMAAMABAAeABMAAAANAAMABAAeABMAAAAOAAMABAAeABMAAAD7/wMABAAbABMAAAA=")
+tile_set = ExtResource("2_bv4ae")
+
+[node name="PauseMenu" parent="." instance=ExtResource("3_bv4ae")]

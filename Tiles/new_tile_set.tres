@@ -1,0 +1,63 @@
+[gd_resource type="TileSet" load_steps=3 format=3 uid="uid://ca86b5hsnno0i"]
+
+[ext_resource type="Texture2D" uid="uid://cwbygau67rc1q" path="res://Assets/Tileset/Tileset-Terrain.png" id="1_h8vpa"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ytqml"]
+texture = ExtResource("1_h8vpa")
+texture_region_size = Vector2i(32, 32)
+26:19/0 = 0
+26:19/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, 16, -16, -16, 16, -16, 16, 16)
+27:19/0 = 0
+27:19/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+29:19/0 = 0
+29:19/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+28:19/0 = 0
+28:19/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+30:19/0 = 0
+30:19/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+26:20/0 = 0
+26:20/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+27:20/0 = 0
+27:20/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+29:20/0 = 0
+29:20/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+28:20/0 = 0
+28:20/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+30:20/0 = 0
+30:20/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+30:21/0 = 0
+30:21/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+29:21/0 = 0
+29:21/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+28:21/0 = 0
+28:21/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+27:21/0 = 0
+27:21/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+26:21/0 = 0
+26:21/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+26:22/0 = 0
+26:22/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+27:22/0 = 0
+27:22/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+28:22/0 = 0
+28:22/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+29:22/0 = 0
+29:22/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+30:22/0 = 0
+30:22/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+30:23/0 = 0
+30:23/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+29:23/0 = 0
+29:23/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+28:23/0 = 0
+28:23/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+27:23/0 = 0
+27:23/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+26:23/0 = 0
+26:23/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[resource]
+tile_size = Vector2i(32, 32)
+physics_layer_0/collision_layer = 32
+physics_layer_0/collision_mask = 193
+sources/4 = SubResource("TileSetAtlasSource_ytqml")
