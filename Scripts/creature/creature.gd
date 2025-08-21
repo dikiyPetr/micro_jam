@@ -31,7 +31,6 @@ var interest_weights := { "food": 1.0, "toy": 0.5 }
 @onready var rotated: Node2D = $RotatedContent
 @onready var vision: Area2D = $RotatedContent/VisionArea
 @onready var vision_shape: CollisionShape2D = $RotatedContent/VisionArea/CollisionShape2D
-@onready var ground_rc: RayCast2D = $GroundCheck
 @onready var wall_rc: RayCast2D = $WallCheck
 @onready var ledge_rc: RayCast2D = $LedgeCheck
 
@@ -73,19 +72,11 @@ func _apply_orientation() -> void:
 		if !is_equal_approx(rotated.scale.x, sx):
 			rotated.scale.x = sx
 
-	# направление лучей
-	wall_rc.position  = Vector2(0.0, -4.0)   # грудь
-	ledge_rc.position = Vector2(0.0, 8.0)    # у ступней
-	ground_rc.position = Vector2(0.0, 8.0)
-
 	wall_rc.target_position  = Vector2(wall_probe_dist * float(_facing_sign), 0.0)
 	ledge_rc.target_position = Vector2(ledge_lookahead_x * float(_facing_sign), ledge_probe_down)
-	ground_rc.target_position = Vector2(0.0, 16.0)
 
-	# сразу обновим кэш лучей
 	wall_rc.force_raycast_update()
 	ledge_rc.force_raycast_update()
-	ground_rc.force_raycast_update()
 
 func _on_area_entered(a: Area2D) -> void:
 	if a is CreatureTarget:
