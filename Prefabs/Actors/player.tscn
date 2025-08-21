@@ -96,7 +96,7 @@ radius = 5.0
 height = 18.0
 
 [node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("CoyoteTimerCoyoteTimer", "JumpBufferTimer", "Anim", "ChStat") groups=["Player"]]
-collision_mask = 32
+collision_mask = 8
 script = ExtResource("1_p3564")
 CoyoteTimerCoyoteTimer = NodePath("CoyoteTimer")
 JumpBufferTimer = NodePath("JumpBufferTimer")

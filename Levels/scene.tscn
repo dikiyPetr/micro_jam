@@ -1,12 +1,18 @@
-[gd_scene load_steps=4 format=4 uid="uid://35wocp3gdpku"]
+[gd_scene load_steps=6 format=4 uid="uid://35wocp3gdpku"]
 
 [ext_resource type="PackedScene" uid="uid://d3r6m7xd7vims" path="res://Prefabs/Actors/player.tscn" id="1_8mlfl"]
+[ext_resource type="PackedScene" uid="uid://cff38qcetujo" path="res://Prefabs/items/creature_target.tscn" id="1_rmkqb"]
 [ext_resource type="TileSet" uid="uid://ca86b5hsnno0i" path="res://Tiles/new_tile_set.tres" id="2_bv4ae"]
 [ext_resource type="PackedScene" uid="uid://bn5ojxqxxv4k1" path="res://UI/pause_ui.tscn" id="3_bv4ae"]
+[ext_resource type="PackedScene" uid="uid://cd0273dcb22tg" path="res://Prefabs/Actors/creature.tscn" id="5_xx0gf"]
 
 [node name="Node2D" type="Node2D"]
 
+[node name="CreatureTarget" parent="." instance=ExtResource("1_rmkqb")]
+position = Vector2(226, 83)
+
 [node name="Player" parent="." instance=ExtResource("1_8mlfl")]
+position = Vector2(-104, 84)
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
 position = Vector2(166, -47)
@@ -18,3 +24,6 @@ tile_map_data = PackedByteArray("AAD8/wMABAAaABMAAAD9/wMABAAbABMAAAD+/wMABAAbABM
 tile_set = ExtResource("2_bv4ae")
 
 [node name="PauseMenu" parent="." instance=ExtResource("3_bv4ae")]
+
+[node name="Creature" parent="." instance=ExtResource("5_xx0gf")]
+position = Vector2(91, 61)

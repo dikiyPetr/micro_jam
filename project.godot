@@ -43,6 +43,13 @@ pause={
 ]
 }
 
+[layer_names]
+
+2d_physics/layer_1="player"
+2d_physics/layer_2="creatures"
+2d_physics/layer_3="items_for_creatures"
+2d_physics/layer_4="ground"
+
 [rendering]
 
 renderer/rendering_method="gl_compatibility"
