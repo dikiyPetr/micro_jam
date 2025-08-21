@@ -26,4 +26,4 @@ tile_set = ExtResource("2_bv4ae")
 [node name="PauseMenu" parent="." instance=ExtResource("3_bv4ae")]
 
 [node name="Creature" parent="." instance=ExtResource("5_xx0gf")]
-position = Vector2(91, 61)
+position = Vector2(-50, 52)

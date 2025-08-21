@@ -3,12 +3,17 @@
 [ext_resource type="Script" uid="uid://5vxevf0owgod" path="res://Scripts/creature/creature.gd" id="1_kkrh2"]
 [ext_resource type="SpriteFrames" uid="uid://dh3tkkqjf262t" path="res://Assets/Creature/creature_sprite_frames.tres" id="2_xu4tm"]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_tbyh7"]
+size = Vector2(37, 31)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_kkrh2"]
+
 [sub_resource type="Animation" id="Animation_kkrh2"]
 resource_name = "idle"
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("AnimatedSprite2D:animation")
+tracks/0/path = NodePath("RotatedContent/AnimatedSprite2D:animation")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -23,7 +28,7 @@ length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("AnimatedSprite2D:animation")
+tracks/0/path = NodePath("RotatedContent/AnimatedSprite2D:animation")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -39,54 +44,54 @@ _data = {
 &"idle": SubResource("Animation_kkrh2")
 }
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_kkrh2"]
-
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_pf3t7"]
 radius = 16.0
 height = 66.0
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_tbyh7"]
-size = Vector2(37, 31)
 
 [node name="Creature" type="CharacterBody2D"]
 collision_layer = 2
 collision_mask = 8
 script = ExtResource("1_kkrh2")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+[node name="RotatedContent" type="Node2D" parent="."]
+
+[node name="CollectionArea" type="Area2D" parent="RotatedContent"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RotatedContent/CollectionArea"]
+position = Vector2(15, 16)
+shape = SubResource("RectangleShape2D_tbyh7")
+
+[node name="VisionArea" type="Area2D" parent="RotatedContent"]
+collision_layer = 0
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RotatedContent/VisionArea"]
+shape = SubResource("CircleShape2D_kkrh2")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="RotatedContent"]
 sprite_frames = ExtResource("2_xu4tm")
 animation = &"idle"
-frame_progress = 0.430747
+frame_progress = 0.891103
+
+[node name="LedgeCheck" type="RayCast2D" parent="."]
+target_position = Vector2(40, 40)
+collision_mask = 8
+collide_with_areas = true
+
+[node name="WallCheck" type="RayCast2D" parent="."]
+target_position = Vector2(40, 0)
+collision_mask = 8
+collide_with_areas = true
+
+[node name="GroundCheck" type="RayCast2D" parent="."]
+target_position = Vector2(0, 40)
+collision_mask = 8
+collide_with_areas = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 &"": SubResource("AnimationLibrary_b4vov")
 }
 
-[node name="VisionArea" type="Area2D" parent="."]
-collision_layer = 0
-collision_mask = 4
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="VisionArea"]
-shape = SubResource("CircleShape2D_kkrh2")
-
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_pf3t7")
-
-[node name="CollectionArea" type="Area2D" parent="."]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="CollectionArea"]
-position = Vector2(15, 16)
-shape = SubResource("RectangleShape2D_tbyh7")
-
-[node name="GroundCheck" type="RayCast2D" parent="."]
-target_position = Vector2(0, 56)
-collision_mask = 8
-
-[node name="WallCheck" type="RayCast2D" parent="."]
-target_position = Vector2(36, 0)
-collision_mask = 8
-
-[node name="LedgeCheck" type="RayCast2D" parent="."]
-target_position = Vector2(53, 50)
-collision_mask = 8

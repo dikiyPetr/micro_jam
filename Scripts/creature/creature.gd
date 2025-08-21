@@ -17,9 +17,9 @@ extends CharacterBody2D
 @export var jump_cooldown: float = 0.30
 
 @export_category("Probes")
-@export var wall_probe_dist: float = 12.0      # дальность проверки стены
-@export var ledge_lookahead_x: float = 14.0    # вперёд по X для проверки пропасти
-@export var ledge_probe_down: float = 26.0     # вниз при проверке пропасти
+@export var wall_probe_dist: float = 40.0      # дальность проверки стены
+@export var ledge_lookahead_x: float = 40.0    # вперёд по X для проверки пропасти
+@export var ledge_probe_down: float = 40.0     # вниз при проверке пропасти
 
 @export_category("Interests (tags -> weight)")
 var interest_weights := { "food": 1.0, "toy": 0.5 }
@@ -28,8 +28,9 @@ var interest_weights := { "food": 1.0, "toy": 0.5 }
 @export var debug_draw: bool = true
 
 ## ---------- Узлы ----------
-@onready var vision: Area2D = $VisionArea
-@onready var vision_shape: CollisionShape2D = $VisionArea/CollisionShape2D
+@onready var rotated: Node2D = $RotatedContent
+@onready var vision: Area2D = $RotatedContent/VisionArea
+@onready var vision_shape: CollisionShape2D = $RotatedContent/VisionArea/CollisionShape2D
 @onready var ground_rc: RayCast2D = $GroundCheck
 @onready var wall_rc: RayCast2D = $WallCheck
 @onready var ledge_rc: RayCast2D = $LedgeCheck
@@ -52,8 +53,39 @@ func _ready() -> void:
 	# сигналы
 	vision.area_entered.connect(_on_area_entered)
 	vision.area_exited.connect(_on_area_exited)
-	# первичная ориентация лучей
-	_update_rays()
+func set_facing_from_dx(dx: float) -> void:
+	if absf(dx) <= 2.0:
+		return
+	var s: int = 1 if dx > 0.0 else -1
+	set_facing(s)
+
+func set_facing(sign: int) -> void:
+	var s: int = 1 if sign >= 0 else -1
+	if s == _facing_sign:
+		return
+	_facing_sign = s
+	_apply_orientation()
+	
+func _apply_orientation() -> void:
+	# визуал (только RotatedContent)
+	if is_instance_valid(rotated):
+		var sx: float = 1.0 if _facing_sign >= 0 else -1.0
+		if !is_equal_approx(rotated.scale.x, sx):
+			rotated.scale.x = sx
+
+	# направление лучей
+	wall_rc.position  = Vector2(0.0, -4.0)   # грудь
+	ledge_rc.position = Vector2(0.0, 8.0)    # у ступней
+	ground_rc.position = Vector2(0.0, 8.0)
+
+	wall_rc.target_position  = Vector2(wall_probe_dist * float(_facing_sign), 0.0)
+	ledge_rc.target_position = Vector2(ledge_lookahead_x * float(_facing_sign), ledge_probe_down)
+	ground_rc.target_position = Vector2(0.0, 16.0)
+
+	# сразу обновим кэш лучей
+	wall_rc.force_raycast_update()
+	ledge_rc.force_raycast_update()
+	ground_rc.force_raycast_update()
 
 func _on_area_entered(a: Area2D) -> void:
 	if a is CreatureTarget:
@@ -77,15 +109,10 @@ func _physics_process(delta: float) -> void:
 		_target = _pick_best_target()
 
 	# Определяем желаемое направление по X
-	var desired_sign: int = _facing_sign
 	if _target:
 		var dx: float = _target.global_position.x - global_position.x
-		if absf(dx) > 2.0:
-			desired_sign = 1 if dx > 0.0 else -1
+		set_facing_from_dx(dx)
 
-	# Обновить «взгляд» и лучи
-	_facing_sign = desired_sign
-	_update_rays()
 
 	# Движение к цели / блуждание
 	if _target:
@@ -94,11 +121,6 @@ func _physics_process(delta: float) -> void:
 		_try_interact(_target)
 	else:
 		_wander(delta)
-
-	# Актуальный спрайт-флип
-	if $".".has_node("AnimatedSprite2D"):
-		var spr: AnimatedSprite2D = $"AnimatedSprite2D"
-		spr.flip_h = (_facing_sign < 0)
 
 	move_and_slide()
 	if debug_draw:
@@ -199,23 +221,16 @@ func _wander(delta: float) -> void:
 		_wander_timer = rng.randf_range(0.6, 1.2)
 		_wander_dir = rng.randf_range(-1.0, 1.0)
 		if absf(_wander_dir) < 0.25:
-			_wander_dir = sign(rng.randf() - 0.5) * 1.0
-	_facing_sign = 1 if(_wander_dir >= 0.0) else -1
-	_update_rays()
+			_wander_dir = 1.0 if rng.randf() >= 0.5 else -1.0
+		set_facing(1 if _wander_dir >= 0.0 else -1)
+	
 	var desired_vx: float = _wander_dir * (speed * 0.4)
 	velocity.x = lerpf(velocity.x, desired_vx, clampf(acceleration * delta / maxf(1.0, speed), 0.0, 1.0))
-	# не падать в пропасть при блуждании
+	
+	# защита от обрыва
+	ledge_rc.force_raycast_update()
 	if is_on_floor() and not ledge_rc.is_colliding():
 		velocity.x = 0.0
-
-## ---------- Лучи и отладка ----------
-func _update_rays() -> void:
-	# GroundCheck — прямо вниз от центра (опционально)
-	ground_rc.target_position = Vector2(0.0, 16.0)
-	# Wall — вперёд на уровне груди
-	wall_rc.target_position = Vector2(wall_probe_dist * float(_facing_sign), 0.0)
-	# Ledge — вперёд-вниз
-	ledge_rc.target_position = Vector2(ledge_lookahead_x * float(_facing_sign), ledge_probe_down)
 
 func _draw() -> void:
 	if not debug_draw:
