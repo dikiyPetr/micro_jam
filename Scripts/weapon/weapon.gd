@@ -53,10 +53,9 @@ func _apply_spread(dir: Vector2, spread: float) -> Vector2:
 func _spawn_projectile(dir: Vector2) -> void:
 	var p := projectile.instantiate()
 	pool.add_child(p)
-	if p is Node2D:
-		(p as Node2D).global_position = global_position
-	if "setup" in p:
-		p.call("setup", dir)
+	if p is Projectile:
+		p.global_position = global_position
+		p.setup(dir)
 
 func _find_nearest_enemy() -> Node2D:
 	var origin := global_position
