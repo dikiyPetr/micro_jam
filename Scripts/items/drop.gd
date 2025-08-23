@@ -2,12 +2,13 @@ extends Node
 class_name Drop
 @export var coin: PackedScene 
 var _rng := RandomNumberGenerator.new()
-@export var coin_min: int = 1
-@export var coin_max: int = 3
-@export var scatter_radius: float = 18.0  # разлёт монет при спавне
+var _drop_stat: DropStat
 
+func _ready() -> void:
+	_drop_stat=Global.dropStat
+	
 func _spawn_coins() -> void:
-	var n := _rng.randi_range(coin_min, max(coin_min, coin_max))
+	var n := _rng.randi_range(_drop_stat.coin_min, max(_drop_stat.coin_min, _drop_stat.coin_max))
 	if n <= 0: return
 
 	var parent := _get_coin_pool()
@@ -16,9 +17,9 @@ func _spawn_coins() -> void:
 		if not (c is Node2D): continue
 		parent.add_child(c)
 		var pos := (get_parent() as Node2D).global_position
-		if scatter_radius > 0.0:
+		if _drop_stat.scatter_radius > 0.0:
 			var ang := _rng.randf() * TAU
-			var r := sqrt(_rng.randf()) * scatter_radius
+			var r := sqrt(_rng.randf()) * _drop_stat.scatter_radius
 			pos += Vector2.RIGHT.rotated(ang) * r
 		(c as Node2D).global_position = pos
 		

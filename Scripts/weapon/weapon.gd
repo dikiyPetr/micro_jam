@@ -7,11 +7,7 @@ class_name Weapon
 @export var enemy: Teams.Values
 
 @export_group("Fire params")
-@export var range: float = 560.0
 @export var auto_fire: bool = true
-@export var fire_rate: float = 3.0
-@export var bullets_per_shot: int = 1
-@export var spread_deg: float = 4.0
 
 @export_group("Orbit visuals") # ⬅️ новое
 @export var orbit_radius: float = 20.0          # радиус облёта вокруг игрока
@@ -21,12 +17,14 @@ class_name Weapon
 @export var flip_vertically_when_left: bool = true
 
 @onready var sprite: Sprite2D = $Sprite2D
+var stat: WeaponStat
 
 var _cd: float = 0.0
 var _rng := RandomNumberGenerator.new()
 var _aim_dir: Vector2 = Vector2.RIGHT
 
 func _ready() -> void:
+	stat = Global.weaponStat;
 	_rng.randomize()
 	_update_sprite_aim(_aim_dir, true)
 
@@ -45,7 +43,7 @@ func _physics_process(delta: float) -> void:
 
 	if _cd <= 0.0:
 		_fire_at_with_base_dir(base_dir)
-		_cd = 1.0 / max(0.01, fire_rate)
+		_cd = 1.0 / max(0.01, stat.fire_rate)
 
 # --- Стрельба ---
 func _fire_at_with_base_dir(base_dir: Vector2) -> void:
@@ -53,9 +51,9 @@ func _fire_at_with_base_dir(base_dir: Vector2) -> void:
 		return
 	_update_sprite_aim(base_dir, true)
 
-	var count: int = max(1, bullets_per_shot)
+	var count: int = max(1, stat.bullets_per_shot)
 	for i in count:
-		var dir := _apply_spread(base_dir, spread_deg)
+		var dir := _apply_spread(base_dir, stat.spread_deg)
 		_spawn_projectile(dir)
 
 func _apply_spread(dir: Vector2, spread: float) -> Vector2:
@@ -74,7 +72,7 @@ func _spawn_projectile(dir: Vector2) -> void:
 		spawn_pos += dir.normalized() * muzzle_offset
 
 		p.global_position = spawn_pos
-		p.setup(dir)
+		p.setup(dir,stat)
 
 		
 func _get_projectile_pool() -> Node:
@@ -85,7 +83,7 @@ func _get_projectile_pool() -> Node:
 func _find_nearest_enemy() -> Node2D:
 	var origin := global_position
 	var best: Node2D
-	var best_d2 := range * range
+	var best_d2 := stat.range * stat.range
 	for n in get_tree().get_nodes_in_group(Groups.Enemy):
 		if not (n is Node2D): continue
 		var d2 := ((n as Node2D).global_position - origin).length_squared()

@@ -88,8 +88,7 @@ func _on_ticker() -> void:
 	if _time_left > 0.0 and _state != State.IDLE:
 		_time_left = max(0.0, _time_left - _ticker.wait_time)
 	tick.emit(_state, _time_left)
-	print(_state)
-	print(_time_left)
+	Global.waveStat.timeLeft = _time_left
 
 func _set_state(s: State, duration: float) -> void:
 	_state = s

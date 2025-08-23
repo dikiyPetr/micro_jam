@@ -15,8 +15,6 @@ region = Rect2(277, 730, 7, 8)
 collision_layer = 144
 collision_mask = 72
 script = ExtResource("1_d8dnd")
-speed = 100.0
-lifetime = 5.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_e3443")
@@ -28,6 +26,7 @@ texture = SubResource("AtlasTexture_yjj3c")
 script = ExtResource("3_iuos6")
 damageFor = 1
 knockbackFrom = NodePath("..")
+hitOnce = true
 
 [connection signal="area_entered" from="." to="Damagable" method="_on_hitbox_area_entered"]
 [connection signal="area_exited" from="." to="Damagable" method="_on_hitbox_area_exited"]

@@ -5,15 +5,18 @@ class_name Damagable
 @export var knockback_force: float = 10.0
 @export var damageFor: Teams.Values
 @export var knockbackFrom: Node2D
+@export var hitOnce: bool = false
 
 var _damage_targets: Dictionary = {} 
+var _hitted: Dictionary = {}
 
 func _process(delta: float) -> void:
 	_do_hit()
 	
 func _do_hit() -> void:
 	for health in _damage_targets.values():
-		if health != null :
+		var isHitted := _hitted.has(health)
+		if health != null && not isHitted:
 			var dmg := DamageInfo.new()
 			dmg.amount = damage_amount
 			dmg.team = damageFor
@@ -21,7 +24,12 @@ func _do_hit() -> void:
 			if target is Node2D:
 				var dir := ((target as Node2D).global_position - knockbackFrom.global_position).normalized()
 				dmg.knockback = dir * knockback_force
-			(health as Health).apply_damage(dmg)
+			var finalDamage := (health as Health).apply_damage(dmg)
+			var parent = get_parent() 
+			if parent is Projectile:
+				parent.onHit(finalDamage)
+			if hitOnce:	
+				_hitted[health] = health
 
 func _addDamageTarget(target: Node) -> void:
 	var health := target.get_parent().get_node_or_null("Health")

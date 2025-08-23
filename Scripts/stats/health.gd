@@ -9,10 +9,7 @@ signal invuln_started()
 signal invuln_ended()
 
 @export_group("HP")
-@export var max_hp: float = 10.0:
-	set(v):
-		max_hp = max(1.0, v)
-		hp = clamp(hp, 0.0, max_hp)
+@export var max_hp: float = 10.0
 @export var hp: float = 10.0
 
 @export_group("Team/FF")
@@ -79,7 +76,6 @@ func apply_damage(damage: DamageInfo) -> float:
 	hp -= final_dmg
 	if clamp_below_zero_to_zero and hp < 0.0:
 		hp = 0.0
-
 	# 4) события/iframes
 	damaged.emit(damage, hp, prev)
 	if iframes_time > 0.0 and not damage.ignore_iframes:

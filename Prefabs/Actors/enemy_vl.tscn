@@ -19,12 +19,10 @@ region = Rect2(48, 49, 18, 18)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_edvrr"]
 
-[node name="EnemyVl" type="CharacterBody2D" node_paths=PackedStringArray("health") groups=["enemy"]]
+[node name="EnemyVl" type="CharacterBody2D" groups=["enemy"]]
 collision_layer = 2
 collision_mask = 2
 script = ExtResource("1_k5hu2")
-max_speed = 100.0
-health = NodePath("Health")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_edvrr")

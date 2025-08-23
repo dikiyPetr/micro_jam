@@ -1,9 +1,8 @@
-[gd_scene load_steps=10 format=3 uid="uid://7mxypo8i85wj"]
+[gd_scene load_steps=9 format=3 uid="uid://7mxypo8i85wj"]
 
 [ext_resource type="Texture2D" uid="uid://cntyrgpuor2pd" path="res://Assets/Player/idle.png" id="1_gn08r"]
 [ext_resource type="Script" uid="uid://baucj1xjjukah" path="res://Scripts/player/player_vl.gd" id="1_oauoo"]
 [ext_resource type="Script" uid="uid://o01oig0pndg5" path="res://Scripts/stats/health.gd" id="3_fevb2"]
-[ext_resource type="Script" uid="uid://cycnwxgp3u6o5" path="res://Scripts/stats/damagable.gd" id="4_u6gmu"]
 [ext_resource type="PackedScene" uid="uid://m1t1ivvecrp1" path="res://Prefabs/weapon/weapon.tscn" id="5_uqg0u"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_oauoo"]
@@ -35,10 +34,6 @@ max_hp = 100.0
 hp = 100.0
 iframes_time = 0.3
 
-[node name="Damagable" type="Node" parent="." node_paths=PackedStringArray("knockbackFrom")]
-script = ExtResource("4_u6gmu")
-knockbackFrom = NodePath("..")
-
 [node name="PickupArea" type="Area2D" parent="." groups=["collector"]]
 collision_layer = 256
 collision_mask = 512
@@ -54,7 +49,6 @@ collision_mask = 4
 shape = SubResource("RectangleShape2D_u6gmu")
 
 [node name="Weapon" parent="." instance=ExtResource("5_uqg0u")]
-fire_rate = 4.0
 
 [connection signal="damaged" from="Health" to="." method="_on_health_damaged"]
 [connection signal="died" from="Health" to="." method="_on_health_died"]
@@ -62,7 +56,3 @@ fire_rate = 4.0
 [connection signal="invuln_ended" from="Health" to="." method="_on_health_invuln_ended"]
 [connection signal="invuln_started" from="Health" to="." method="_on_health_invuln_started"]
 [connection signal="revived" from="Health" to="." method="_on_health_revived"]
-[connection signal="area_entered" from="PickupArea" to="Damagable" method="_on_hitbox_area_entered"]
-[connection signal="area_exited" from="PickupArea" to="Damagable" method="_on_hitbox_area_exited"]
-[connection signal="body_entered" from="PickupArea" to="Damagable" method="_on_hitbox_body_entered"]
-[connection signal="body_exited" from="PickupArea" to="Damagable" method="_on_hitbox_body_exited"]

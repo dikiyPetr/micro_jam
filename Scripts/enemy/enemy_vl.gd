@@ -1,9 +1,6 @@
 extends CharacterBody2D
 class_name Enemy
 
-@export_group("Chase")
-@export var max_speed: float = 160.0
-@export var acceleration: float = 1400.0
 @export var target: Node2D  # можно оставить пустым и искать по группе "player"
 
 @export_group("Stability")
@@ -11,17 +8,21 @@ class_name Enemy
 @export var overlap_damp: float = 0.6         # на сколько гасим скорость при сильной коррекции
 @export var overlap_remainder_px: float = 1.5 # считаем «заметной» коррекцию > N пикселей
 
-@export_group("damage")
-@export var health: Health
-
+@onready var damagable: Damagable = $Damagable
+@onready var health: Health = $Health
 var _player: Node2D
 var _dir_to_player := Vector2.ZERO
+var _stat: EnemyStat
 
 func _ready() -> void:
 	if target != null:
 		_player = target
 	if _player == null:
 		_player = get_tree().get_first_node_in_group(Groups.Player) as Node2D
+	_stat = Global.enemyStat
+	health.max_hp=_stat.hp
+	health.hp=_stat.hp
+	damagable.damage_amount=_stat.damage
 
 func _physics_process(delta: float) -> void:
 	# 1) Курс на игрока
@@ -32,7 +33,7 @@ func _physics_process(delta: float) -> void:
 
 	# 2) Steering к цели с ограничением Δv/кадр
 	var v := velocity
-	var desired := _dir_to_player * max_speed
+	var desired := _dir_to_player * _stat.max_speed
 	var dv := desired - v
 	var max_dv := max_dv_per_frame * delta
 	if dv.length() > max_dv:
