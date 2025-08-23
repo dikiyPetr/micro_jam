@@ -1,0 +1,24 @@
+[gd_scene load_steps=5 format=3 uid="uid://mf3g5ft2lqqs"]
+
+[ext_resource type="PackedScene" uid="uid://7mxypo8i85wj" path="res://Prefabs/Actors/player_vl.tscn" id="1_kfwtp"]
+[ext_resource type="PackedScene" uid="uid://brot53s1d2vc6" path="res://Prefabs/Area/enemy_spawn_area.tscn" id="2_rffa8"]
+[ext_resource type="PackedScene" uid="uid://m1t1ivvecrp1" path="res://Prefabs/weapon/weapon.tscn" id="3_edbwy"]
+[ext_resource type="PackedScene" uid="uid://cibpipu7imcxm" path="res://Prefabs/Area/projectile_area.tscn" id="3_rffa8"]
+
+[node name="TestCoreScene" type="Node2D"]
+
+[node name="PlayerVl" parent="." instance=ExtResource("1_kfwtp")]
+
+[node name="EnemySpawnArea" parent="PlayerVl" node_paths=PackedStringArray("pool") instance=ExtResource("2_rffa8")]
+spawn_every = 1.0
+pool = NodePath("../../Pool")
+
+[node name="Weapon" parent="PlayerVl" node_paths=PackedStringArray("pool") instance=ExtResource("3_edbwy")]
+pool = NodePath("../../Pool")
+range = 100.0
+
+[node name="ProjectileArea" parent="PlayerVl" instance=ExtResource("3_rffa8")]
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="Pool" type="Node2D" parent="."]

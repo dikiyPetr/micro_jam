@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://m1t1ivvecrp1"]
+
+[ext_resource type="Script" uid="uid://dm2p0osvojhlx" path="res://Scripts/weapon/weapon.gd" id="1_snd20"]
+[ext_resource type="PackedScene" uid="uid://cwa0c2k1jc6mr" path="res://Prefabs/projectile/projectile.tscn" id="2_mbn6f"]
+
+[node name="Weapon" type="Node2D"]
+script = ExtResource("1_snd20")
+projectile = ExtResource("2_mbn6f")
+enemy = 1

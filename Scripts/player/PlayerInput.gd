@@ -3,4 +3,5 @@ class_name PlayerInput
 
 const Right := "right"
 const Left  := "left"
-const Jump  := "jump"
+const Up  := "up"
+const Down  := "down"

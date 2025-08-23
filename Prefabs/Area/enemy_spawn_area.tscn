@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=3 uid="uid://brot53s1d2vc6"]
+
+[ext_resource type="Script" uid="uid://dx62xyewhrn5g" path="res://Scripts/area/enemy_spawn_area.gd" id="1_i84k2"]
+[ext_resource type="PackedScene" uid="uid://ded5qcwcmmv2o" path="res://Prefabs/Actors/enemy_vl.tscn" id="2_5evg6"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_5evg6"]
+radius = 600.0
+
+[node name="EnemySpawnArea" type="Area2D"]
+script = ExtResource("1_i84k2")
+enemy = ExtResource("2_5evg6")
+radius_max = 600.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_5evg6")
+
+[node name="SpawnTimer" type="Timer" parent="."]
