@@ -1,30 +1,80 @@
 extends CharacterBody2D
 class_name Enemy
 
-@export var target: Node2D  # можно оставить пустым и искать по группе "player"
+@export var target: Node2D                    # если пусто — возьмём из группы "player"
 
 @export_group("Stability")
-@export var max_dv_per_frame: float = 600.0   # максимум изменения скорости за кадр
-@export var overlap_damp: float = 0.6         # на сколько гасим скорость при сильной коррекции
-@export var overlap_remainder_px: float = 1.5 # считаем «заметной» коррекцию > N пикселей
+@export var max_dv_per_frame: float = 600.0
+@export var overlap_damp: float = 0.6
+@export var overlap_remainder_px: float = 1.5
+
+@export_group("Spawn")
+@export var play_spawn_anim: bool = true      # проигрывать анимацию появления
+@export var spawn_anim_name: StringName = &"spawn"
+@export var lock_movement_during_spawn: bool = true
 
 @onready var damagable: Damagable = $Damagable
 @onready var health: Health = $Health
+@onready var _anim: AnimationPlayer = $AnimationPlayer
+@onready var _hitbox: Area2D = $Hitbox
+@onready var _hurtbox: Area2D = $Hurtbox
+@onready var _sprite: AnimatedSprite2D = $Sprite2D
+
 var _player: Node2D
 var _dir_to_player := Vector2.ZERO
 var _stat: EnemyStat
+var _spawning: bool = false
 
 func _ready() -> void:
 	if target != null:
 		_player = target
 	if _player == null:
 		_player = get_tree().get_first_node_in_group(Groups.Player) as Node2D
+	_sprite.play()
 	_stat = Global.enemyStat
-	health.max_hp=_stat.hp
-	health.hp=_stat.hp
-	damagable.damage_amount=_stat.damage
+	health.max_hp = _stat.hp
+	health.hp = _stat.hp
+	damagable.damage_amount = _stat.damage
+	# Активация/деактивация боевых зон через функцию:
+	_set_combat_enabled(false)  # по умолчанию выключим — на случай мгновенного спавна
 
+	# Стартовая анимация появления
+	if play_spawn_anim and _anim and _anim.has_animation(spawn_anim_name):
+		_spawning = true
+		if lock_movement_during_spawn:
+			set_physics_process(false)  # временно стопаем тики движения
+		_anim.play(spawn_anim_name)
+		# по окончании включим столкновения/движение
+		_anim.animation_finished.connect(_on_anim_finished)
+	else:
+		# нет анимации — просто включаем боевые зоны сразу
+		_set_combat_enabled(true)
+
+func _on_anim_finished(name: StringName) -> void:
+	if name != spawn_anim_name:
+		return
+	_spawning = false
+	_set_combat_enabled(true)
+	if lock_movement_during_spawn:
+		set_physics_process(true)
+
+func _set_combat_enabled(enabled: bool) -> void:
+	# Hitbox/Hurtbox могут быть отключены через monitoring,
+	# чтобы они не генерировали событий во время спавна
+	if _hitbox:
+		_hitbox.monitoring =  enabled
+		_hitbox.monitorable = enabled
+	if _hurtbox:
+		_hurtbox.monitoring= enabled
+		_hurtbox.monitorable = enabled
+	if enabled:
+		add_to_group(Groups.Enemy)
+		
 func _physics_process(delta: float) -> void:
+	# При спавне (если не стопали _physics_process) просто не двигаемся
+	if _spawning and lock_movement_during_spawn:
+		return
+
 	# 1) Курс на игрока
 	if is_instance_valid(_player):
 		_dir_to_player = (_player.global_position - global_position).normalized()
@@ -46,7 +96,7 @@ func _physics_process(delta: float) -> void:
 	velocity = v
 	move_and_slide()
 
-	# 3) Если была «глубокая» коррекция проникновения — демпфим скорость
+	# 3) Демпф при глубокой коррекции
 	_apply_overlap_damping(pre_move_vel)
 
 func _apply_overlap_damping(pre_move_vel: Vector2) -> void:

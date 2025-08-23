@@ -19,6 +19,7 @@ position = Vector2(2, 0)
 
 [node name="EnemySpawnArea" parent="PlayerVl" node_paths=PackedStringArray("pool") groups=["spawner"] instance=ExtResource("2_rffa8")]
 pool = NodePath("../../Pool")
+radius_min = 150.0
 radius_max = 300.0
 
 [node name="ProjectileArea" parent="PlayerVl" instance=ExtResource("3_rffa8")]

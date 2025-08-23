@@ -1,34 +1,90 @@
-[gd_scene load_steps=11 format=3 uid="uid://ded5qcwcmmv2o"]
+[gd_scene load_steps=14 format=3 uid="uid://ded5qcwcmmv2o"]
 
 [ext_resource type="Script" uid="uid://eqf5ehm4tajh" path="res://Scripts/enemy/enemy_vl.gd" id="1_k5hu2"]
-[ext_resource type="Texture2D" uid="uid://c52barm6au7bw" path="res://Assets/Enemy/ghost_skeleton_main_flaten-Sheet.png" id="2_m1oif"]
+[ext_resource type="SpriteFrames" uid="uid://dqiw7hb5k15r2" path="res://Assets/Enemy/enemy_sprite_frames.tres" id="2_4qfwf"]
 [ext_resource type="Script" uid="uid://o01oig0pndg5" path="res://Scripts/stats/health.gd" id="3_m1oif"]
 [ext_resource type="Script" uid="uid://cycnwxgp3u6o5" path="res://Scripts/stats/damagable.gd" id="4_edvrr"]
 [ext_resource type="Script" uid="uid://bsqya3w8bptdj" path="res://Scripts/items/drop.gd" id="5_rol3d"]
 [ext_resource type="PackedScene" uid="uid://c4tpr8vvvw4r8" path="res://Prefabs/items/coin.tscn" id="6_4qfwf"]
 
+[sub_resource type="Animation" id="Animation_33013"]
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"idle"]
+}
+
+[sub_resource type="Animation" id="Animation_4uocp"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"idle"]
+}
+
+[sub_resource type="Animation" id="Animation_34ktt"]
+resource_name = "new_animation"
+length = 4.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"spawn"]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_7w1n0"]
+_data = {
+&"RESET": SubResource("Animation_4uocp"),
+&"idle": SubResource("Animation_33013"),
+&"spawn": SubResource("Animation_34ktt")
+}
+
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_edvrr"]
 radius = 8.0
 height = 20.0
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_rol3d"]
-atlas = ExtResource("2_m1oif")
-region = Rect2(48, 49, 18, 18)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_m1oif"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_edvrr"]
 
-[node name="EnemyVl" type="CharacterBody2D" groups=["enemy"]]
+[node name="EnemyVl" type="CharacterBody2D"]
 collision_layer = 2
 collision_mask = 2
 script = ExtResource("1_k5hu2")
 
+[node name="Sprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = ExtResource("2_4qfwf")
+animation = &"idle"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_7w1n0")
+}
+autoplay = "spawn"
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_edvrr")
-
-[node name="Sprite2D" type="Sprite2D" parent="."]
-texture = SubResource("AtlasTexture_rol3d")
 
 [node name="Health" type="Node" parent="."]
 script = ExtResource("3_m1oif")
@@ -38,18 +94,18 @@ team = 1
 script = ExtResource("4_edvrr")
 knockbackFrom = NodePath("..")
 
-[node name="hitbox" type="Area2D" parent="."]
+[node name="Hitbox" type="Area2D" parent="."]
 collision_layer = 4
 collision_mask = 32
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="hitbox"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
 shape = SubResource("RectangleShape2D_m1oif")
 
-[node name="hurtbox" type="Area2D" parent="."]
+[node name="Hurtbox" type="Area2D" parent="."]
 collision_layer = 8
 collision_mask = 16
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="hurtbox"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
 shape = SubResource("RectangleShape2D_edvrr")
 
 [node name="Drop" type="Node" parent="."]
@@ -61,11 +117,11 @@ coin = ExtResource("6_4qfwf")
 [connection signal="died" from="Health" to="Drop" method="_on_health_died"]
 [connection signal="invuln_ended" from="Health" to="." method="_flashOff"]
 [connection signal="invuln_started" from="Health" to="." method="_flashOn"]
-[connection signal="area_entered" from="hitbox" to="Damagable" method="_on_hitbox_area_entered"]
-[connection signal="area_exited" from="hitbox" to="Damagable" method="_on_hitbox_area_exited"]
-[connection signal="body_entered" from="hitbox" to="Damagable" method="_on_hitbox_body_entered"]
-[connection signal="body_exited" from="hitbox" to="Damagable" method="_on_hitbox_body_exited"]
-[connection signal="area_entered" from="hurtbox" to="." method="on_area_entered"]
-[connection signal="area_exited" from="hurtbox" to="." method="on_area_exited"]
-[connection signal="body_entered" from="hurtbox" to="." method="on_body_entered"]
-[connection signal="body_exited" from="hurtbox" to="." method="on_body_exited"]
+[connection signal="area_entered" from="Hitbox" to="Damagable" method="_on_hitbox_area_entered"]
+[connection signal="area_exited" from="Hitbox" to="Damagable" method="_on_hitbox_area_exited"]
+[connection signal="body_entered" from="Hitbox" to="Damagable" method="_on_hitbox_body_entered"]
+[connection signal="body_exited" from="Hitbox" to="Damagable" method="_on_hitbox_body_exited"]
+[connection signal="area_entered" from="Hurtbox" to="." method="on_area_entered"]
+[connection signal="area_exited" from="Hurtbox" to="." method="on_area_exited"]
+[connection signal="body_entered" from="Hurtbox" to="." method="on_body_entered"]
+[connection signal="body_exited" from="Hurtbox" to="." method="on_body_exited"]
