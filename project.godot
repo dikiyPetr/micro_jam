@@ -15,6 +15,10 @@ run/main_scene="uid://mf3g5ft2lqqs"
 config/features=PackedStringArray("4.4", "GL Compatibility")
 config/icon="res://icon.svg"
 
+[autoload]
+
+Global="*res://Scripts/global/global.gd"
+
 [editor]
 
 movie_writer/mix_rate=24000
