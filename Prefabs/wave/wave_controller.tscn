@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://7dkw7jdc7p6m"]
+
+[ext_resource type="Script" uid="uid://cqtxya2vilsdt" path="res://Scripts/wave/wave_controller.gd" id="1_b3n15"]
+
+[node name="WaveController" type="Node"]
+script = ExtResource("1_b3n15")
+
+[node name="WaveTimer" type="Timer" parent="."]
+
+[node name="BreakTimer" type="Timer" parent="."]

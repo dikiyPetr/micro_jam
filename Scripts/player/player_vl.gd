@@ -14,7 +14,6 @@ class_name Player
 @export var health: Health
 
 var input_dir: Vector2 = Vector2.ZERO
-var _damage_targets: Dictionary = {} 
 
 func _ready() -> void:
 	pass
@@ -44,50 +43,21 @@ func _read_input() -> void:
 		input_dir = Vector2.ZERO
 	else:
 		input_dir = move.normalized()
-
-func _addDamageTarget(target: Node) -> void:
-	var health := target.get_parent().get_node_or_null("Health")
-	if health is Health:
-		_damage_targets[target] = health
-
-func _removeDamageTarget(target: Node) -> void:
-	var health := target.get_parent().get_node_or_null("Health")
-	if health is Health:
-		_damage_targets.erase(target)
 		
 func _on_health_damaged(damage: Variant, hp: float, hp_prev: float) -> void:
 	pass # Replace with function body.
 
-
 func _on_health_died(damage: Variant) -> void:
 	pass # Replace with function body.
-
 
 func _on_health_healed(amount: float, hp: float) -> void:
 	pass # Replace with function body.
 
-
 func _on_health_invuln_ended() -> void:
 	pass # Replace with function body.
-
 
 func _on_health_invuln_started() -> void:
 	pass # Replace with function body.
 
-
 func _on_health_revived(hp: float) -> void:
 	pass # Replace with function body.
-
-
-func _on_hurtbox_area_entered(a: Area2D) -> void:
-	_addDamageTarget(a)
-
-
-func _on_hurtbox_area_exited(a: Area2D) -> void:
-	_removeDamageTarget(a)
-
-func _on_hurtbox_body_exited(a: Node2D) -> void:
-	_removeDamageTarget(a)
-
-func _on_hurtbox_body_entered(a: Node2D) -> void:
-	_addDamageTarget(a)

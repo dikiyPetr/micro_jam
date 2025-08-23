@@ -17,6 +17,8 @@ config/icon="res://icon.svg"
 
 [editor]
 
+movie_writer/mix_rate=24000
+movie_writer/mjpeg_quality=0.5
 movie_writer/movie_file="D:/projects/platformer_sandbox_gds/movie.avi"
 
 [input]
@@ -62,6 +64,8 @@ pause={
 2d_physics/layer_6="playerHurtbox"
 2d_physics/layer_7="projectileArea"
 2d_physics/layer_8="projectile"
+2d_physics/layer_9="playerPickup"
+2d_physics/layer_10="pickupable"
 
 [rendering]
 

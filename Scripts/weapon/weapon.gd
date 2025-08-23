@@ -27,7 +27,6 @@ func _physics_process(delta: float) -> void:
 	var target := _find_nearest_enemy()
 	if target == null :
 		return
-	print(target)
 	if _cd <= 0.0:
 		_fire_at(target)
 		_cd = 1.0 / max(0.01, fire_rate)
