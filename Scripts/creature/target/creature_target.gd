@@ -14,7 +14,7 @@ func can_be_targeted() -> bool:
 func on_interacted(by: Node) -> void:
 	_cooldown_left = cooldown
 	# тут эффекты/анимации/звук/удаление и т.п.
-
+	queue_free() 
 func _process(delta: float) -> void:
 	if _cooldown_left > 0.0:
 		_cooldown_left -= delta

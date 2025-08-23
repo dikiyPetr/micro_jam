@@ -8,8 +8,8 @@ size = Vector2(37, 31)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_kkrh2"]
 
-[sub_resource type="Animation" id="Animation_kkrh2"]
-resource_name = "idle"
+[sub_resource type="Animation" id="Animation_xu4tm"]
+length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -23,8 +23,8 @@ tracks/0/keys = {
 "values": [&"idle"]
 }
 
-[sub_resource type="Animation" id="Animation_xu4tm"]
-length = 0.001
+[sub_resource type="Animation" id="Animation_kkrh2"]
+resource_name = "idle"
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true

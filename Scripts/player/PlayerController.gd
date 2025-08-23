@@ -18,10 +18,6 @@ func collect_intents() -> void:
 		input -= 1.0
 
 	moveX = input
-	# В оригинале использовалось IsActionPressed (а не just_pressed).
-	# Сохраняю это поведение:
-	jumpPressed = Input.is_action_pressed(PlayerInput.Jump)
-	jumpHeld = Input.is_action_pressed(PlayerInput.Jump)
 
 func update_anim() -> void:
 	if not is_on_floor():

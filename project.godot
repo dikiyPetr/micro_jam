@@ -11,13 +11,19 @@ config_version=5
 [application]
 
 config/name="platformer_sandbox_gds"
-run/main_scene="uid://35wocp3gdpku"
+run/main_scene="uid://mf3g5ft2lqqs"
 config/features=PackedStringArray("4.4", "GL Compatibility")
 config/icon="res://icon.svg"
 
 [autoload]
 
 Global="*res://Scripts/global/global.gd"
+
+[editor]
+
+movie_writer/mix_rate=24000
+movie_writer/mjpeg_quality=0.5
+movie_writer/movie_file="D:/projects/platformer_sandbox_gds/movie.avi"
 
 [input]
 
@@ -31,9 +37,14 @@ right={
 "events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":68,"key_label":0,"unicode":100,"location":0,"echo":false,"script":null)
 ]
 }
-jump={
+up={
 "deadzone": 0.2,
-"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":32,"key_label":0,"unicode":32,"location":0,"echo":false,"script":null)
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":87,"key_label":0,"unicode":119,"location":0,"echo":false,"script":null)
+]
+}
+down={
+"deadzone": 0.2,
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":83,"key_label":0,"unicode":115,"location":0,"echo":false,"script":null)
 ]
 }
 attack={
@@ -50,9 +61,15 @@ pause={
 [layer_names]
 
 2d_physics/layer_1="player"
-2d_physics/layer_2="creatures"
-2d_physics/layer_3="items_for_creatures"
-2d_physics/layer_4="ground"
+2d_physics/layer_2="enemy"
+2d_physics/layer_3="enemyHitbox"
+2d_physics/layer_4="enemyHurtbox"
+2d_physics/layer_5="playerHitbox"
+2d_physics/layer_6="playerHurtbox"
+2d_physics/layer_7="projectileArea"
+2d_physics/layer_8="projectile"
+2d_physics/layer_9="playerPickup"
+2d_physics/layer_10="pickupable"
 
 [rendering]
 

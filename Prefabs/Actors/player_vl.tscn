@@ -1,0 +1,64 @@
+[gd_scene load_steps=9 format=3 uid="uid://7mxypo8i85wj"]
+
+[ext_resource type="Texture2D" uid="uid://cntyrgpuor2pd" path="res://Assets/Player/idle.png" id="1_gn08r"]
+[ext_resource type="Script" uid="uid://baucj1xjjukah" path="res://Scripts/player/player_vl.gd" id="1_oauoo"]
+[ext_resource type="Script" uid="uid://o01oig0pndg5" path="res://Scripts/stats/health.gd" id="3_fevb2"]
+[ext_resource type="Script" uid="uid://cycnwxgp3u6o5" path="res://Scripts/stats/damagable.gd" id="4_u6gmu"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_oauoo"]
+radius = 8.0
+height = 16.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fevb2"]
+atlas = ExtResource("1_gn08r")
+region = Rect2(35, 33, 11, 14)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fevb2"]
+size = Vector2(13.5, 15.5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_u6gmu"]
+
+[node name="PlayerVl" type="CharacterBody2D" node_paths=PackedStringArray("health") groups=["player"]]
+script = ExtResource("1_oauoo")
+health = NodePath("Health")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_oauoo")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = SubResource("AtlasTexture_fevb2")
+
+[node name="Health" type="Node" parent="."]
+script = ExtResource("3_fevb2")
+max_hp = 100.0
+hp = 100.0
+iframes_time = 0.3
+
+[node name="Damagable" type="Node" parent="." node_paths=PackedStringArray("knockbackFrom")]
+script = ExtResource("4_u6gmu")
+knockbackFrom = NodePath("..")
+
+[node name="PickupArea" type="Area2D" parent="." groups=["collector"]]
+collision_layer = 256
+collision_mask = 512
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PickupArea"]
+shape = SubResource("RectangleShape2D_fevb2")
+
+[node name="Hurtbox" type="Area2D" parent="."]
+collision_layer = 32
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
+shape = SubResource("RectangleShape2D_u6gmu")
+
+[connection signal="damaged" from="Health" to="." method="_on_health_damaged"]
+[connection signal="died" from="Health" to="." method="_on_health_died"]
+[connection signal="healed" from="Health" to="." method="_on_health_healed"]
+[connection signal="invuln_ended" from="Health" to="." method="_on_health_invuln_ended"]
+[connection signal="invuln_started" from="Health" to="." method="_on_health_invuln_started"]
+[connection signal="revived" from="Health" to="." method="_on_health_revived"]
+[connection signal="area_entered" from="PickupArea" to="Damagable" method="_on_hitbox_area_entered"]
+[connection signal="area_exited" from="PickupArea" to="Damagable" method="_on_hitbox_area_exited"]
+[connection signal="body_entered" from="PickupArea" to="Damagable" method="_on_hitbox_body_entered"]
+[connection signal="body_exited" from="PickupArea" to="Damagable" method="_on_hitbox_body_exited"]
