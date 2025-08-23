@@ -71,7 +71,8 @@ func apply_damage(damage: DamageInfo) -> float:
 		return 0.0
 	if _iframes_left > 0.0 and not damage.ignore_iframes:
 		return 0.0
-
+	if damage.team != team:
+		return 0.0
 	var final_dmg := damage.amount
 	
 	var prev := hp

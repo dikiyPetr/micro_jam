@@ -54,6 +54,7 @@ collision_mask = 4
 shape = SubResource("RectangleShape2D_u6gmu")
 
 [node name="Weapon" parent="." instance=ExtResource("5_uqg0u")]
+fire_rate = 4.0
 
 [connection signal="damaged" from="Health" to="." method="_on_health_damaged"]
 [connection signal="died" from="Health" to="." method="_on_health_died"]

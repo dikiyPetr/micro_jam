@@ -23,7 +23,7 @@ region = Rect2(48, 49, 18, 18)
 collision_layer = 2
 collision_mask = 2
 script = ExtResource("1_k5hu2")
-max_speed = 10.0
+max_speed = 100.0
 health = NodePath("Health")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -38,7 +38,6 @@ team = 1
 
 [node name="Damagable" type="Node" parent="." node_paths=PackedStringArray("knockbackFrom")]
 script = ExtResource("4_edvrr")
-team = 1
 knockbackFrom = NodePath("..")
 
 [node name="hitbox" type="Area2D" parent="."]
@@ -64,6 +63,10 @@ coin = ExtResource("6_4qfwf")
 [connection signal="died" from="Health" to="Drop" method="_on_health_died"]
 [connection signal="invuln_ended" from="Health" to="." method="_flashOff"]
 [connection signal="invuln_started" from="Health" to="." method="_flashOn"]
+[connection signal="area_entered" from="hitbox" to="Damagable" method="_on_hitbox_area_entered"]
+[connection signal="area_exited" from="hitbox" to="Damagable" method="_on_hitbox_area_exited"]
+[connection signal="body_entered" from="hitbox" to="Damagable" method="_on_hitbox_body_entered"]
+[connection signal="body_exited" from="hitbox" to="Damagable" method="_on_hitbox_body_exited"]
 [connection signal="area_entered" from="hurtbox" to="." method="on_area_entered"]
 [connection signal="area_exited" from="hurtbox" to="." method="on_area_exited"]
 [connection signal="body_entered" from="hurtbox" to="." method="on_body_entered"]

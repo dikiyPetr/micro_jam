@@ -16,6 +16,8 @@ class_name Player
 var input_dir: Vector2 = Vector2.ZERO
 
 func _ready() -> void:
+	health.max_hp=Global.MaxPlayerHP
+	health.hp=Global.PlayerHP
 	pass
 
 func _physics_process(delta: float) -> void:
@@ -51,11 +53,11 @@ func _read_input() -> void:
 		input_dir = move.normalized()
 		
 func _on_health_damaged(damage: Variant, hp: float, hp_prev: float) -> void:
-	pass # Replace with function body.
+	Global.PlayerHP=health.hp
 
 func _on_health_died(damage: Variant) -> void:
-	pass # Replace with function body.
-
+	Global.PlayerHP=health.hp
+	
 func _on_health_healed(amount: float, hp: float) -> void:
 	pass # Replace with function body.
 

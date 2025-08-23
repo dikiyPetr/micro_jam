@@ -26,6 +26,7 @@ texture = SubResource("AtlasTexture_yjj3c")
 
 [node name="Damagable" type="Node" parent="." node_paths=PackedStringArray("knockbackFrom")]
 script = ExtResource("3_iuos6")
+damageFor = 1
 knockbackFrom = NodePath("..")
 
 [connection signal="area_entered" from="." to="Damagable" method="_on_hitbox_area_entered"]

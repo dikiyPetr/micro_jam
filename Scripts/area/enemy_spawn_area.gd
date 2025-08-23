@@ -52,7 +52,10 @@ func _ready() -> void:
 	set_is_active(_active, _difficulty)
 	# реагируем на выход тел из области
 	body_exited.connect(_on_body_exited)
-
+	
+	if _shape and _shape.shape is CircleShape2D:
+		(_shape.shape as CircleShape2D).radius=radius_max
+		
 	set_physics_process(true)
 
 func _physics_process(_delta: float) -> void:
@@ -121,10 +124,6 @@ func _cleanup_dead() -> void:
 func _draw() -> void:
 	if not debug_draw:
 		return
-	# контур круглой области (берём радиус из CollisionShape2D, если это CircleShape2D)
-	if _shape and _shape.shape is CircleShape2D:
-		var r := (_shape.shape as CircleShape2D).radius
-		draw_arc(Vector2.ZERO, r, 0.0, TAU, 96, Color(0.2, 0.7, 1, 0.25), 2.0, true)
 	# кольцо спавна
 	draw_arc(Vector2.ZERO, radius_min, 0.0, TAU, 64, Color(0,1,0,0.6), 2.0, true)
 	draw_arc(Vector2.ZERO, radius_max, 0.0, TAU, 64, Color(0,1,0,0.35), 2.0, true)

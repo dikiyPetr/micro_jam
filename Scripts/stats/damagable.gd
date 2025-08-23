@@ -3,7 +3,7 @@ class_name Damagable
 @export_group("damage")
 @export var damage_amount: float = 1.0
 @export var knockback_force: float = 10.0
-@export var team: Teams.Values
+@export var damageFor: Teams.Values
 @export var knockbackFrom: Node2D
 
 var _damage_targets: Dictionary = {} 
@@ -16,7 +16,7 @@ func _do_hit() -> void:
 		if health != null :
 			var dmg := DamageInfo.new()
 			dmg.amount = damage_amount
-			dmg.team = team
+			dmg.team = damageFor
 			var target := (health as Health).get_parent()
 			if target is Node2D:
 				var dir := ((target as Node2D).global_position - knockbackFrom.global_position).normalized()

@@ -5,7 +5,7 @@
 [ext_resource type="TileSet" uid="uid://ca86b5hsnno0i" path="res://Tiles/new_tile_set.tres" id="2_bv4ae"]
 [ext_resource type="PackedScene" uid="uid://bn5ojxqxxv4k1" path="res://UI/pause_ui.tscn" id="3_bv4ae"]
 [ext_resource type="PackedScene" uid="uid://cd0273dcb22tg" path="res://Prefabs/Actors/creature.tscn" id="5_xx0gf"]
-[ext_resource type="PackedScene" uid="uid://2pbx8tni0jj7" path="res://UI/ui.tscn" id="6_xx0gf"]
+[ext_resource type="PackedScene" path="res://UI/ui.tscn" id="6_xx0gf"]
 
 [node name="Node2D" type="Node2D"]
 

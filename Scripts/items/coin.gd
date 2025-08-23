@@ -30,5 +30,5 @@ func _physics_process(delta: float) -> void:
 func _on_area_entered(a: Area2D) -> void:
 	if not a.is_in_group(Groups.Collector):
 		return
-	#Wallet.add(value)
+	Global.PlayerCoins = Global.PlayerCoins + 1
 	queue_free()
