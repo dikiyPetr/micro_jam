@@ -1,9 +1,10 @@
-[gd_scene load_steps=9 format=3 uid="uid://7mxypo8i85wj"]
+[gd_scene load_steps=10 format=3 uid="uid://7mxypo8i85wj"]
 
 [ext_resource type="Texture2D" uid="uid://cntyrgpuor2pd" path="res://Assets/Player/idle.png" id="1_gn08r"]
 [ext_resource type="Script" uid="uid://baucj1xjjukah" path="res://Scripts/player/player_vl.gd" id="1_oauoo"]
 [ext_resource type="Script" uid="uid://o01oig0pndg5" path="res://Scripts/stats/health.gd" id="3_fevb2"]
 [ext_resource type="Script" uid="uid://cycnwxgp3u6o5" path="res://Scripts/stats/damagable.gd" id="4_u6gmu"]
+[ext_resource type="PackedScene" uid="uid://m1t1ivvecrp1" path="res://Prefabs/weapon/weapon.tscn" id="5_uqg0u"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_oauoo"]
 radius = 8.0
@@ -51,6 +52,8 @@ collision_mask = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
 shape = SubResource("RectangleShape2D_u6gmu")
+
+[node name="Weapon" parent="." instance=ExtResource("5_uqg0u")]
 
 [connection signal="damaged" from="Health" to="." method="_on_health_damaged"]
 [connection signal="died" from="Health" to="." method="_on_health_died"]

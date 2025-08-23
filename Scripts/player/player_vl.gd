@@ -31,6 +31,12 @@ func _physics_process(delta: float) -> void:
 	velocity = v
 	move_and_slide()
 
+func _process(delta: float) -> void:
+	if velocity.x > 0.1:
+		$Sprite2D.flip_h = false
+	elif velocity.x < -0.1:
+		$Sprite2D.flip_h = true
+
 func _read_input() -> void:
 	# используем имена действий из твоего PlayerInput
 	var move := Input.get_vector(
