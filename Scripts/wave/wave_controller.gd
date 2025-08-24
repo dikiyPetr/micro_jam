@@ -118,6 +118,7 @@ func _begin_wave() -> void:
 func _end_wave() -> void:
 	# выключаем спавнеры и оповещаем
 	_set_spawners_active(false)
+	_start_slot_machine()
 	wave_ended.emit(_wave_index)
 
 	if _stat.break_duration > 0.0:
@@ -137,3 +138,8 @@ func _set_spawners_active(active: bool) -> void:
 	for n in get_tree().get_nodes_in_group(Groups.Spawner):
 		if n is EnemySpawnArea:
 			n.set_is_active(active)
+			
+func _start_slot_machine():
+	for n in get_tree().get_nodes_in_group(Groups.SlotMachine):
+		if n is SlotMachineManager:
+			n.start()
