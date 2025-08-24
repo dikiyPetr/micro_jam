@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://mf3g5ft2lqqs"]
+[gd_scene load_steps=17 format=3 uid="uid://mf3g5ft2lqqs"]
 
 [ext_resource type="PackedScene" uid="uid://bn5ojxqxxv4k1" path="res://UI/pause_ui.tscn" id="1_katap"]
 [ext_resource type="PackedScene" uid="uid://7mxypo8i85wj" path="res://Prefabs/Actors/player_vl.tscn" id="1_kfwtp"]
