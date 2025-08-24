@@ -16,6 +16,8 @@ class_name Weapon
 @export_range(0.0, 1.0, 0.01) var aim_smooth: float = 0.18
 @export var flip_vertically_when_left: bool = true
 
+@onready var shot_sound: AudioStreamPlayer2D = $ShotSound
+
 @onready var sprite: Sprite2D = $Sprite2D
 var stat: WeaponStat
 
@@ -49,8 +51,11 @@ func _physics_process(delta: float) -> void:
 func _fire_at_with_base_dir(base_dir: Vector2) -> void:
 	if projectile == null:
 		return
+		
 	_update_sprite_aim(base_dir, true)
-
+	
+	shot_sound.play()
+	
 	var count: int = max(1, stat.bullets_per_shot)
 	for i in count:
 		var dir := _apply_spread(base_dir, stat.spread_deg)
