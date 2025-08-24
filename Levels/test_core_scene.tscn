@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://mf3g5ft2lqqs"]
+[gd_scene load_steps=11 format=3 uid="uid://mf3g5ft2lqqs"]
 
 [ext_resource type="PackedScene" uid="uid://bn5ojxqxxv4k1" path="res://UI/pause_ui.tscn" id="1_katap"]
 [ext_resource type="PackedScene" uid="uid://7mxypo8i85wj" path="res://Prefabs/Actors/player_vl.tscn" id="1_kfwtp"]
@@ -8,10 +8,13 @@
 [ext_resource type="PackedScene" uid="uid://2pbx8tni0jj7" path="res://UI/ui.tscn" id="6_oc0rc"]
 [ext_resource type="Script" uid="uid://vxx1mcqxplt7" path="res://Scripts/level/level_manager.gd" id="7_jyedi"]
 [ext_resource type="AudioStream" uid="uid://bbl4wl2enkhei" path="res://Assets/Sounds/Patron Saint of Heists.mp3" id="8_1l0e7"]
+[ext_resource type="Script" uid="uid://b4f5h7j2hni7v" path="res://Scripts/slot_machine/slot_machine_manager.gd" id="9_k5ha1"]
+[ext_resource type="PackedScene" uid="uid://yxpoegnyjx62" path="res://SlotMachine/slot_machine_clean.tscn" id="10_nxgek"]
 
 [node name="TestCoreScene" type="Node2D"]
 
 [node name="WaveController" parent="." instance=ExtResource("1_oc0rc")]
+wave_duration = 15.0
 
 [node name="Pool" type="Node2D" parent="." groups=["pool"]]
 position = Vector2(2, 0)
@@ -37,7 +40,26 @@ script = ExtResource("7_jyedi")
 
 [node name="SoundManager" type="Node2D" parent="."]
 
-[node name="BGMusic" type="AudioStreamPlayer2D" parent="SoundManager"]
+[node name="BGMusic" type="AudioStreamPlayer" parent="SoundManager"]
 stream = ExtResource("8_1l0e7")
 autoplay = true
 bus = &"Music"
+
+[node name="SlotMachineManager" type="Node2D" parent="." groups=["slot_machine"]]
+process_mode = 3
+script = ExtResource("9_k5ha1")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="SlotMachineManager"]
+
+[node name="BackgroundOverlay" type="ColorRect" parent="SlotMachineManager/CanvasLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 0)
+metadata/_edit_use_anchors_ = true
+
+[node name="SlotMachine" parent="SlotMachineManager/CanvasLayer" instance=ExtResource("10_nxgek")]
+position = Vector2(690, 372)
