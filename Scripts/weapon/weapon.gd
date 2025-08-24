@@ -29,6 +29,12 @@ func _ready() -> void:
 	_rng.randomize()
 	_update_sprite_aim(_aim_dir, true)
 
+# Обновить статы оружия (вызывается после изменения Global.weaponStat)
+func update_stats() -> void:
+	stat = Global.weaponStat
+	# Пересчитываем кулдаун с новыми статами
+	_cd = 1.0 / max(0.01, stat.fire_rate)
+
 func _physics_process(delta: float) -> void:
 	_cd = max(0.0, _cd - delta)
 	if not auto_fire:

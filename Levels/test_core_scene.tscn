@@ -5,13 +5,14 @@
 [ext_resource type="PackedScene" uid="uid://7dkw7jdc7p6m" path="res://Prefabs/wave/wave_controller.tscn" id="1_oc0rc"]
 [ext_resource type="PackedScene" uid="uid://brot53s1d2vc6" path="res://Prefabs/Area/enemy_spawn_area.tscn" id="2_rffa8"]
 [ext_resource type="PackedScene" uid="uid://cibpipu7imcxm" path="res://Prefabs/Area/projectile_area.tscn" id="3_rffa8"]
-[ext_resource type="PackedScene" uid="uid://dr5y3s4pgin5q" path="res://UI/ui.tscn" id="6_oc0rc"]
+[ext_resource type="PackedScene" uid="uid://2pbx8tni0jj7" path="res://UI/ui.tscn" id="6_oc0rc"]
 [ext_resource type="Script" uid="uid://vxx1mcqxplt7" path="res://Scripts/level/level_manager.gd" id="7_jyedi"]
 [ext_resource type="AudioStream" uid="uid://bbl4wl2enkhei" path="res://Assets/Sounds/Patron Saint of Heists.mp3" id="8_1l0e7"]
 [ext_resource type="Script" uid="uid://b4f5h7j2hni7v" path="res://Scripts/slot_machine/slot_machine_manager.gd" id="9_k5ha1"]
 [ext_resource type="PackedScene" uid="uid://yxpoegnyjx62" path="res://SlotMachine/slot_machine_clean.tscn" id="10_nxgek"]
 [ext_resource type="PackedScene" uid="uid://bbsga7adf2pid" path="res://Prefabs/Area/floor.tscn" id="11_8llcg"]
 [ext_resource type="Script" uid="uid://bn0ah4u5nx1mg" path="res://Scripts/global/game_manager.gd" id="12_rabog"]
+[ext_resource type="Resource" uid="uid://bqx8vqxqxqxqx" path="res://Scripts/slot_machine/stat_modifier.tres" id="13_stat_modifier"]
 
 [node name="TestCoreScene" type="Node2D"]
 
@@ -45,10 +46,12 @@ script = ExtResource("7_jyedi")
 process_mode = 3
 stream = ExtResource("8_1l0e7")
 autoplay = true
+bus = &"Music"
 
 [node name="SlotMachineManager" type="Node2D" parent="." groups=["slot_machine"]]
 process_mode = 3
 script = ExtResource("9_k5ha1")
+stat_modifier = ExtResource("13_stat_modifier")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="SlotMachineManager"]
 
@@ -61,6 +64,23 @@ grow_vertical = 2
 mouse_filter = 2
 color = Color(0, 0, 0, 0)
 metadata/_edit_use_anchors_ = true
+
+[node name="StatLabel" type="Label" parent="SlotMachineManager/CanvasLayer"]
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -100.0
+offset_top = -250.0
+offset_right = 100.0
+offset_bottom = -200.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Крутим: HP"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="SlotMachine" parent="SlotMachineManager/CanvasLayer" instance=ExtResource("10_nxgek")]
 position = Vector2(690, 372)

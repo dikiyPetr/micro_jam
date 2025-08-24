@@ -1,0 +1,27 @@
+[gd_resource type="Resource" script_class="SlotMachineConfig" load_steps=2 format=3 uid="uid://c8yavqxqxqxqx"]
+
+[ext_resource type="Script" uid="uid://cihh8pyrpyu11" path="res://Scripts/slot_machine/slot_machine_config.gd" id="1_script"]
+
+[resource]
+script = ExtResource("1_script")
+common_threshold = 10
+rare_threshold = 25
+epic_threshold = 50
+legendary_threshold = 100
+lose_multiplier = 0.5
+common_hp_change = 2
+common_speed_change = 10.0
+common_damage_change = 5.0
+common_fire_rate_change = 0.1
+rare_hp_change = 4
+rare_speed_change = 20.0
+rare_damage_change = 10.0
+rare_fire_rate_change = 0.2
+epic_hp_change = 8
+epic_speed_change = 40.0
+epic_damage_change = 20.0
+epic_fire_rate_change = 0.4
+legendary_hp_change = 15
+legendary_speed_change = 80.0
+legendary_damage_change = 40.0
+legendary_fire_rate_change = 0.8

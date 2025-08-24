@@ -5,7 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://dpkdrjq0ao163" path="res://Assets/pricel/pricel1 bubny.png" id="3_1nuj0"]
 [ext_resource type="AudioStream" uid="uid://cx3s1g7iuxpox" path="res://Assets/Sounds/Shot.wav" id="4_hs6qg"]
 
-[node name="Weapon" type="Node2D"]
+[node name="Weapon" type="Node2D" groups=["weapon"]]
 script = ExtResource("1_snd20")
 projectile = ExtResource("2_mbn6f")
 enemy = 1
@@ -16,3 +16,4 @@ texture = ExtResource("3_1nuj0")
 
 [node name="ShotSound" type="AudioStreamPlayer2D" parent="." groups=["slot_machine"]]
 stream = ExtResource("4_hs6qg")
+bus = &"Sounds"
