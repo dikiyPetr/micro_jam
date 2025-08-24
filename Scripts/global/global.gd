@@ -6,7 +6,7 @@ var enemyStat: EnemyStat = EnemyStat.new()
 var weaponStat: WeaponStat = WeaponStat.new()
 var dropStat: DropStat = DropStat.new()
 var spawnStat: SpawnStat = SpawnStat.new()
-
+var welcomeShown:= false
 func reset() -> void:
 	playerStat = PlayerStat.new()
 	gambleStat = GambleStat.new()
