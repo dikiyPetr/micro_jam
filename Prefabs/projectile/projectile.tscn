@@ -1,15 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://cwa0c2k1jc6mr"]
+[gd_scene load_steps=5 format=3 uid="uid://cwa0c2k1jc6mr"]
 
 [ext_resource type="Script" uid="uid://bl8e2u4cphoi6" path="res://Scripts/projectile/projectile.gd" id="1_d8dnd"]
-[ext_resource type="Texture2D" uid="uid://c52barm6au7bw" path="res://Assets/Enemy/ghost_skeleton_main_flaten-Sheet.png" id="1_uxm05"]
+[ext_resource type="Texture2D" uid="uid://dqi7mpcm4o7ej" path="res://Assets/Projectile/projectile.png" id="2_d8dnd"]
 [ext_resource type="Script" uid="uid://cycnwxgp3u6o5" path="res://Scripts/stats/damagable.gd" id="3_iuos6"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_e3443"]
 size = Vector2(10, 10)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_yjj3c"]
-atlas = ExtResource("1_uxm05")
-region = Rect2(277, 730, 7, 8)
 
 [node name="Projectile" type="Area2D" groups=["projectile"]]
 collision_layer = 144
@@ -20,7 +16,8 @@ script = ExtResource("1_d8dnd")
 shape = SubResource("RectangleShape2D_e3443")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-texture = SubResource("AtlasTexture_yjj3c")
+scale = Vector2(0.05, 0.05)
+texture = ExtResource("2_d8dnd")
 
 [node name="Damagable" type="Node" parent="." node_paths=PackedStringArray("knockbackFrom")]
 script = ExtResource("3_iuos6")
