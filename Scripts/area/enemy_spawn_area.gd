@@ -21,8 +21,8 @@ var _rng := RandomNumberGenerator.new()
 var _alive: Array[Node2D] = []
 var _active: bool = false
 @onready var _shape: CollisionShape2D = $CollisionShape2D
+@onready var _floorShape: CollisionShape2D = $"../../Floor/CollisionShape2D"
 var _stat: SpawnStat
-
 # тек. рабочие параметры (не мутируем Global.spawnStat)
 var _per_tick_current: int
 var _max_alive_current: int
@@ -90,14 +90,38 @@ func _on_tick() -> void:
 			break
 		var pos := _random_point_in_ring()
 		_schedule_spawn_at(pos)
-
+@export var tries_per_spawn: int = 8
 func _random_point_in_ring() -> Vector2:
 	var r2_min := radius_min * radius_min
 	var r2_max := radius_max * radius_max
-	var r := sqrt(lerp(r2_min, r2_max, _rng.randf()))
-	var ang := _rng.randf() * TAU
-	return global_position + Vector2.RIGHT.rotated(ang) * r
 
+	for i in tries_per_spawn:
+		var r := sqrt(lerp(r2_min, r2_max, _rng.randf()))
+		var ang := _rng.randf() * TAU
+		var pos := global_position + Vector2.RIGHT.rotated(ang) * r
+		if rect_contains_point(_floorShape , pos):
+			return pos
+
+	# если не нашли за N попыток — вернём ближайшую допустимую точку к арене
+	return _clamp_to_bounds(global_position)
+	
+func _clamp_to_bounds(p: Vector2) -> Vector2:
+	var shape: RectangleShape2D = _floorShape.shape
+	return Vector2(
+		clamp(p.x, shape.position.x, shape.position.x + shape.size.x),
+		clamp(p.y, shape.position.y, shape.position.y + shape.size.y)
+	)
+		
+
+func rect_contains_point(collision_shape: CollisionShape2D, point: Vector2) -> bool:
+	if collision_shape.shape == null:
+		return false
+	if not (collision_shape.shape is RectangleShape2D):
+		return false
+	var rect: RectangleShape2D = collision_shape.shape
+	var local_point: Vector2 = collision_shape.to_local(point)
+	return abs(local_point.x) <= rect.extents.x and abs(local_point.y) <= rect.extents.y
+	
 func _schedule_spawn_at(world_pos: Vector2) -> void:
 	var delay := _rng.randf_range(_delay_min_current, _delay_max_current)
 	var t := get_tree().create_timer(delay, false)
