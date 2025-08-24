@@ -18,7 +18,7 @@ func _process(delta):
 	CoinBar.value = Global.gambleStat.coins;
 	CoinBarText.text = Global.formatTier(tier, tierSize);
 
-	WaveTime.text = Global.formatTime();
+	WaveTime.text ='%d$' % Global.gambleStat.totalCoins
 	
 	# Обновляем характеристики персонажа
 	update_stats();
