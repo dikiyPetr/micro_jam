@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://mf3g5ft2lqqs"]
+[gd_scene load_steps=16 format=3 uid="uid://mf3g5ft2lqqs"]
 
 [ext_resource type="PackedScene" uid="uid://bn5ojxqxxv4k1" path="res://UI/pause_ui.tscn" id="1_katap"]
 [ext_resource type="PackedScene" uid="uid://7mxypo8i85wj" path="res://Prefabs/Actors/player_vl.tscn" id="1_kfwtp"]
@@ -14,6 +14,10 @@
 [ext_resource type="Resource" uid="uid://bqx8vqxqxqxqx" path="res://Scripts/slot_machine/stat_modifier.tres" id="13_stat_modifier"]
 [ext_resource type="PackedScene" uid="uid://c5cwv343rhnn8" path="res://UI/death_menu.tscn" id="14_75gsi"]
 [ext_resource type="Resource" uid="uid://bfq7p2diwmkvc" path="res://Scripts/slot_machine/slot_machine_trigger_config.tres" id="14_trigger_config"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_75gsi"]
+font_size = 29
+shadow_size = 0
 
 [node name="TestCoreScene" type="Node2D"]
 
@@ -72,13 +76,14 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -100.0
-offset_top = -250.0
-offset_right = 100.0
-offset_bottom = -200.0
+offset_left = -143.0
+offset_top = -219.0
+offset_right = 144.0
+offset_bottom = -169.0
 grow_horizontal = 2
 grow_vertical = 2
 text = "Gamble: HP"
+label_settings = SubResource("LabelSettings_75gsi")
 horizontal_alignment = 1
 vertical_alignment = 1
 
