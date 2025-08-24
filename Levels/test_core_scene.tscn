@@ -28,8 +28,10 @@ position = Vector2(2, 0)
 pool = NodePath("../../Pool")
 radius_min = 150.0
 radius_max = 300.0
+debug_draw = false
 
 [node name="ProjectileArea" parent="PlayerVl" instance=ExtResource("3_rffa8")]
+debug_draw = false
 
 [node name="Camera2D" type="Camera2D" parent="PlayerVl"]
 

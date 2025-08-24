@@ -19,19 +19,23 @@ func reset() -> void:
 func level2() -> void:
 	enemyStat.level2()
 	spawnStat.level2()
+	gambleStat.levelX(2)
 	
 func level3() -> void:
 	enemyStat.level3()
 	spawnStat.level3()
+	gambleStat.levelX(3)
 
 func level4() -> void:
 	enemyStat.level4()
 	spawnStat.level4()
+	gambleStat.levelX(4)
 
 # умножение статов на уровень
 func levelX(x: float) -> void:
 	enemyStat.levelX(x)
 	spawnStat.levelX(x)
+	gambleStat.levelX(x)
 	
 func formatHP() -> String:
 	var fstr = '%d / %d';

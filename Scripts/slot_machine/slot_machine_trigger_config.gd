@@ -1,10 +1,6 @@
 class_name SlotMachineTriggerConfig
 extends Resource
 
-# Количество монет для запуска слот-машины
-@export_group("Условия запуска")
-@export var coins_required: int = 50
-
 # Настройки времени для определения качества крутки
 @export_group("Временные пороги для качества")
 @export var legendary_time_threshold: float = 30.0  # секунд для легендарного качества

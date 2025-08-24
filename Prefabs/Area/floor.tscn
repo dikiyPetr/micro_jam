@@ -3,7 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://ba3xm3mn0pr14" path="res://Assets/floor/back.png" id="1_dkmfh"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dkmfh"]
-size = Vector2(2048, 1152)
+size = Vector2(1985, 1116)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_021g8"]
 size = Vector2(2063, 20)
@@ -37,13 +37,14 @@ scale = Vector2(0.516667, 0.516667)
 texture = ExtResource("1_dkmfh")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-31.5, -18)
 shape = SubResource("RectangleShape2D_dkmfh")
 
 [node name="Area2D" type="StaticBody2D" parent="."]
 collision_layer = 1024
 
 [node name="CollisionShape2D4" type="CollisionShape2D" parent="Area2D"]
-position = Vector2(-10, 1172)
+position = Vector2(-10, 550)
 shape = SubResource("RectangleShape2D_021g8")
 
 [node name="CollisionShape2D3" type="CollisionShape2D" parent="Area2D"]
@@ -51,7 +52,7 @@ position = Vector2(-1, -586)
 shape = SubResource("RectangleShape2D_021g8")
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="Area2D"]
-position = Vector2(1033, -2)
+position = Vector2(972, -2)
 shape = SubResource("RectangleShape2D_yqfgp")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]

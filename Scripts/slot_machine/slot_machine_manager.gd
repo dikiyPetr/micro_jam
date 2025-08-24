@@ -56,7 +56,7 @@ func check_trigger_conditions() -> bool:
 		return false
 	
 	# Проверяем, достаточно ли монет
-	if Global.gambleStat.coins >= config.coins_required:
+	if Global.gambleStat.coins >= Global.gambleStat.coins_required:
 		return true
 	
 	return false

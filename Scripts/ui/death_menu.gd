@@ -16,6 +16,8 @@ func _ready() -> void:
 
 func showMenu() -> void:
 	visible = true
+	$Control/Panel/VBoxContainer/Label.text="Game Over
+Your Score: %s" % Global.gambleStat.totalCoins
 	
 func _on_restart_pressed() -> void:
 	if _gameManager.set_playing():
