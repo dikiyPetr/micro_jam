@@ -51,7 +51,6 @@ func update_stats():
 	var fire_rate_stat = StatsContainer.get_node("FireRateStat");
 	
 	# Обновляем текст характеристик
-	hp_stat.text = "HP: %d" % Global.playerStat.maxHp;
 	speed_stat.text = "Speed: %.0f" % Global.playerStat.maxSpeed;
 	damage_stat.text = "Damage: %d" % Global.weaponStat.damage;
 	fire_rate_stat.text = "Fire Rate: %.1f" % Global.weaponStat.fire_rate;
