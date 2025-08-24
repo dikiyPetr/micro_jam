@@ -20,7 +20,7 @@ offset_left = 239.0
 offset_top = 57.0
 offset_right = 535.0
 offset_bottom = 226.0
-text = "Нажмите кнопку для игры"
+text = "Press button to play"
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(-2, -1)
