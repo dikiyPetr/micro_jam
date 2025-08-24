@@ -13,6 +13,9 @@ class_name Enemy
 @export var spawn_anim_name: StringName = &"spawn"
 @export var lock_movement_during_spawn: bool = true
 
+@export_group("config")
+@export var enemyConfig: Array[EnemyConfig]
+
 @onready var damagable: Damagable = $Damagable
 @onready var health: Health = $Health
 @onready var _anim: AnimationPlayer = $AnimationPlayer
@@ -21,21 +24,31 @@ class_name Enemy
 @onready var _sprite: AnimatedSprite2D = $Sprite2D
 @onready var _collision: CollisionShape2D = $CollisionShape2D
 @onready var _drop: Drop = $Drop
+
 var _player: Node2D
 var _dir_to_player := Vector2.ZERO
 var _stat: EnemyStat
+var config: EnemyConfig
 var _spawning: bool = false
+var _rng := RandomNumberGenerator.new()
 
 func _ready() -> void:
 	if target != null:
 		_player = target
 	if _player == null:
 		_player = get_tree().get_first_node_in_group(Groups.Player) as Node2D
+		
+	var configI : int = _rng.randi_range(0, enemyConfig.size()-1)
+	config  = enemyConfig.get(configI)
+	_sprite.sprite_frames = config.sprite_frames
 	_sprite.play()
+	
 	_stat = Global.enemyStat
-	health.max_hp = _stat.hp
-	health.hp = _stat.hp
-	damagable.damage_amount = _stat.damage
+	health.max_hp = _stat.hp * config.hp
+	health.hp = _stat.hp * config.hp
+	damagable.damage_amount = _stat.damage * config.damage
+	
+	
 	# Активация/деактивация боевых зон через функцию:
 	_set_combat_enabled(false)  # по умолчанию выключим — на случай мгновенного спавна
 
@@ -86,7 +99,7 @@ func _physics_process(delta: float) -> void:
 
 	# 2) Steering к цели с ограничением Δv/кадр
 	var v := velocity
-	var desired := _dir_to_player * _stat.max_speed
+	var desired := _dir_to_player * _stat.max_speed * config.speed
 	var dv := desired - v
 	var max_dv := max_dv_per_frame * delta
 	if dv.length() > max_dv:

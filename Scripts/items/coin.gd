@@ -1,11 +1,14 @@
 extends Area2D
 class_name Coin       # авто-деспавн (0 = беск.)
 
+var sprite_frames: SpriteFrames
 var _life: float
 var _target: Node2D
 var _stat: DropStat
 
 func _ready() -> void:
+	$Sprite2D.sprite_frames = sprite_frames
+	$Sprite2D.play()
 	_stat = Global.dropStat
 	area_entered.connect(_on_area_entered)
 	_life = _stat.lifetime

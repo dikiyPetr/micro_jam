@@ -1,0 +1,67 @@
+[gd_resource type="SpriteFrames" load_steps=12 format=3 uid="uid://uuhk8o5i0r5u"]
+
+[ext_resource type="Texture2D" uid="uid://bma0ou2ouxmo2" path="res://Assets/chip/yellow_chip/death.png" id="1_diwgx"]
+[ext_resource type="Texture2D" uid="uid://haoxuysbox88" path="res://Assets/chip/yellow_chip/3(9).png" id="2_6m1q4"]
+[ext_resource type="Texture2D" uid="uid://bfrwkaark5d18" path="res://Assets/chip/yellow_chip/3(8).png" id="3_d5xih"]
+[ext_resource type="Texture2D" uid="uid://0aixnxpao5tc" path="res://Assets/chip/yellow_chip/3.png" id="4_mfcuk"]
+[ext_resource type="Texture2D" uid="uid://57y7e5f1b7kc" path="res://Assets/chip/yellow_chip/4.png" id="5_i22m7"]
+[ext_resource type="Texture2D" uid="uid://b56b066ptm2my" path="res://Assets/chip/yellow_chip/5.png" id="6_ei1y2"]
+[ext_resource type="Texture2D" uid="uid://byi3gsyvrx86d" path="res://Assets/chip/yellow_chip/6.png" id="7_218h4"]
+[ext_resource type="Texture2D" uid="uid://cab6n0lnejqpn" path="res://Assets/chip/yellow_chip/7.png" id="8_yq20q"]
+[ext_resource type="Texture2D" uid="uid://cubtsy8a562ud" path="res://Assets/chip/yellow_chip/8.png" id="9_41ptv"]
+[ext_resource type="Texture2D" uid="uid://djv4n78qasie1" path="res://Assets/chip/yellow_chip/1.png" id="10_8nfmm"]
+[ext_resource type="Texture2D" uid="uid://fxvxqc44n2ju" path="res://Assets/chip/yellow_chip/2.png" id="11_1id1m"]
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_diwgx")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_6m1q4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_d5xih")
+}],
+"loop": false,
+"name": &"death",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_mfcuk")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_i22m7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_ei1y2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_218h4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_yq20q")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_41ptv")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_8nfmm")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_1id1m")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_mfcuk")
+}],
+"loop": true,
+"name": &"spawn",
+"speed": 5.0
+}]

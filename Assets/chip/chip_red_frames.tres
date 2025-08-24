@@ -1,0 +1,67 @@
+[gd_resource type="SpriteFrames" load_steps=12 format=3 uid="uid://is1n1ygrlo0u"]
+
+[ext_resource type="Texture2D" uid="uid://ccq60am2neacn" path="res://Assets/chip/death.png" id="1_jgans"]
+[ext_resource type="Texture2D" uid="uid://n1op6gya7ut7" path="res://Assets/chip/3(7).png" id="2_j1xqy"]
+[ext_resource type="Texture2D" uid="uid://c8ldqygsdbf4f" path="res://Assets/chip/3(6).png" id="3_dgqt8"]
+[ext_resource type="Texture2D" uid="uid://c7nl7u3d20fv3" path="res://Assets/chip/4.png" id="5_caenr"]
+[ext_resource type="Texture2D" uid="uid://bawso8t8n3117" path="res://Assets/chip/5.png" id="6_dus5l"]
+[ext_resource type="Texture2D" uid="uid://cpdt2vmg44wp4" path="res://Assets/chip/6.png" id="7_oehig"]
+[ext_resource type="Texture2D" uid="uid://dila5hlsqxfjw" path="res://Assets/chip/7.png" id="8_ki75f"]
+[ext_resource type="Texture2D" uid="uid://biglb0pihh0mq" path="res://Assets/chip/8.png" id="9_j4e5h"]
+[ext_resource type="Texture2D" uid="uid://bdhh7tfj7hvjc" path="res://Assets/chip/1.png" id="10_yr0u7"]
+[ext_resource type="Texture2D" uid="uid://diickue08qhcq" path="res://Assets/chip/2.png" id="11_3eadf"]
+[ext_resource type="Texture2D" uid="uid://7v027xundmbm" path="res://Assets/chip/3.png" id="12_hcd6q"]
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_jgans")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_j1xqy")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_dgqt8")
+}],
+"loop": false,
+"name": &"death",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("12_hcd6q")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_caenr")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_dus5l")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_oehig")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_ki75f")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_j4e5h")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_yr0u7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_3eadf")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("12_hcd6q")
+}],
+"loop": true,
+"name": &"spawn",
+"speed": 5.0
+}]

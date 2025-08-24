@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://mf3g5ft2lqqs"]
+[gd_scene load_steps=13 format=3 uid="uid://mf3g5ft2lqqs"]
 
 [ext_resource type="PackedScene" uid="uid://bn5ojxqxxv4k1" path="res://UI/pause_ui.tscn" id="1_katap"]
 [ext_resource type="PackedScene" uid="uid://7mxypo8i85wj" path="res://Prefabs/Actors/player_vl.tscn" id="1_kfwtp"]
@@ -10,6 +10,8 @@
 [ext_resource type="AudioStream" uid="uid://bbl4wl2enkhei" path="res://Assets/Sounds/Patron Saint of Heists.mp3" id="8_1l0e7"]
 [ext_resource type="Script" uid="uid://b4f5h7j2hni7v" path="res://Scripts/slot_machine/slot_machine_manager.gd" id="9_k5ha1"]
 [ext_resource type="PackedScene" uid="uid://yxpoegnyjx62" path="res://SlotMachine/slot_machine_clean.tscn" id="10_nxgek"]
+[ext_resource type="PackedScene" uid="uid://bbsga7adf2pid" path="res://Prefabs/Area/floor.tscn" id="11_8llcg"]
+[ext_resource type="Script" uid="uid://bn0ah4u5nx1mg" path="res://Scripts/global/game_manager.gd" id="12_rabog"]
 
 [node name="TestCoreScene" type="Node2D"]
 
@@ -61,3 +63,8 @@ metadata/_edit_use_anchors_ = true
 
 [node name="SlotMachine" parent="SlotMachineManager/CanvasLayer" instance=ExtResource("10_nxgek")]
 position = Vector2(690, 372)
+
+[node name="Floor" parent="." instance=ExtResource("11_8llcg")]
+
+[node name="GameManager" type="Node" parent="."]
+script = ExtResource("12_rabog")

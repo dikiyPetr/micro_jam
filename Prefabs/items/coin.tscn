@@ -1,57 +1,10 @@
-[gd_scene load_steps=11 format=3 uid="uid://c4tpr8vvvw4r8"]
+[gd_scene load_steps=8 format=3 uid="uid://c4tpr8vvvw4r8"]
 
 [ext_resource type="Script" uid="uid://xn3min3ybq8g" path="res://Scripts/items/coin.gd" id="1_g0cwl"]
-[ext_resource type="Texture2D" uid="uid://cyyk0k0qtbmsk" path="res://Assets/chip/3(1).png" id="2_f62sj"]
-[ext_resource type="Texture2D" uid="uid://bqbd8p3su5hju" path="res://Assets/chip/3(2).png" id="2_p2xcf"]
-[ext_resource type="Texture2D" uid="uid://bm71fopce3g46" path="res://Assets/chip/3(3).png" id="3_f4l7e"]
+[ext_resource type="SpriteFrames" uid="uid://d2ayjccqb1mce" path="res://Assets/chip/chip_blue_frames.tres" id="2_0foyn"]
 [ext_resource type="Texture2D" uid="uid://didkoon0746vs" path="res://Assets/shadow/shadow.png" id="5_f4l7e"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0foyn"]
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_mhrrc"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("2_p2xcf")
-}, {
-"duration": 1.0,
-"texture": ExtResource("3_f4l7e")
-}, {
-"duration": 1.0,
-"texture": ExtResource("2_f62sj")
-}],
-"loop": false,
-"name": &"death",
-"speed": 5.0
-}]
-
-[sub_resource type="Animation" id="Animation_f4l7e"]
-resource_name = "death"
-length = 0.6
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Shadow:scale")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.366667),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector2(0.0218333, 0.025), Vector2(0.01, 0.02)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Shadow:visible")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0.6),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
-}
 
 [sub_resource type="Animation" id="Animation_mhrrc"]
 length = 0.001
@@ -80,6 +33,34 @@ tracks/1/keys = {
 "values": [true]
 }
 
+[sub_resource type="Animation" id="Animation_f4l7e"]
+resource_name = "death"
+length = 0.6
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Shadow:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.366667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0.0218333, 0.025), Vector2(0.02, 0.021)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Shadow:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.6),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_8cklf"]
 _data = {
 &"RESET": SubResource("Animation_mhrrc"),
@@ -96,11 +77,9 @@ shape = SubResource("RectangleShape2D_0foyn")
 
 [node name="Sprite2D" type="AnimatedSprite2D" parent="."]
 scale = Vector2(0.09, 0.09)
-sprite_frames = SubResource("SpriteFrames_mhrrc")
+sprite_frames = ExtResource("2_0foyn")
 animation = &"death"
 autoplay = "death"
-frame = 2
-frame_progress = 1.0
 
 [node name="Shadow" type="Sprite2D" parent="."]
 z_index = -1

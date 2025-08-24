@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://bbsga7adf2pid"]
+
+[node name="Floor" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+z_index = -2
