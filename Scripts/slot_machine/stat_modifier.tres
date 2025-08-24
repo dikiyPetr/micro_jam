@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="StatModifier" load_steps=3 format=3 uid="uid://bqx8vqxqxqxqx"]
 
-[ext_resource type="Script" uid="uid://d1vfajma3i41w" path="res://Scripts/slot_machine/stat_modifier.gd" id="1_script"]
+[ext_resource type="Script" path="res://Scripts/slot_machine/stat_modifier.gd" id="1_script"]
 [ext_resource type="Resource" uid="uid://c8yavqxqxqxqx" path="res://Scripts/slot_machine/slot_machine_config.tres" id="2_config"]
 
 [resource]

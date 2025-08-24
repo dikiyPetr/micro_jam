@@ -25,6 +25,7 @@ func _on_continue_pressed() -> void:
 
 func _on_restart_pressed() -> void:
 	get_tree().paused = false
+	Global.reset()
 	get_tree().reload_current_scene()
 
 func toggle_pause() -> void:
