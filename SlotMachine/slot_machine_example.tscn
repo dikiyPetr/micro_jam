@@ -1,0 +1,32 @@
+[gd_scene load_steps=5 format=3 uid="uid://b8x70a02a1b3c"]
+
+[ext_resource type="PackedScene" uid="uid://ddgy0akvaiig3" path="res://Bahonika/slot_machine_clean.tscn" id="1_slot"]
+[ext_resource type="Script" path="res://Bahonika/slot_machine_example.gd" id="2_script"]
+[ext_resource type="Texture2D" uid="uid://cm6clsvrp6egg" path="res://Bahonika/slotmachine.png" id="3_anioq"]
+[ext_resource type="Texture2D" uid="uid://4sk2d7s3ga0e" path="res://Bahonika/1.png" id="4_udlxd"]
+
+[node name="SlotMachineExample" type="Node2D"]
+script = ExtResource("2_script")
+
+[node name="SlotMachine" parent="." instance=ExtResource("1_slot")]
+win_chance_percent = 90.0
+stop_delay = 1.0
+
+[node name="SpinButton" type="Button" parent="."]
+offset_left = -191.0
+offset_top = 84.0
+offset_right = 196.0
+offset_bottom = 191.0
+text = "Spin"
+
+[node name="ResultLabel" type="Label" parent="."]
+offset_left = 239.0
+offset_top = 57.0
+offset_right = 535.0
+offset_bottom = 226.0
+text = "Нажмите кнопку для игры"
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(-2, -1)
+
+[connection signal="pressed" from="SpinButton" to="." method="_on_spin_button_pressed"]

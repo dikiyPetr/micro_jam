@@ -1,0 +1,110 @@
+[gd_scene load_steps=10 format=3 uid="uid://yxpoegnyjx62"]
+
+[ext_resource type="Script" uid="uid://k20uk0xxlvgc" path="res://SlotMachine/slot_machine.gd" id="1_e7kax"]
+[ext_resource type="Texture2D" uid="uid://mcp75v7mylki" path="res://SlotMachine/Assets/1.png" id="2_0ridg"]
+[ext_resource type="Texture2D" uid="uid://b4poxowsfb6n8" path="res://SlotMachine/Assets/3.png" id="3_52lsl"]
+[ext_resource type="AudioStream" uid="uid://bg6cl6iudpg2e" path="res://SlotMachine/win.wav" id="4_8bidr"]
+[ext_resource type="Texture2D" uid="uid://wurxthauvdww" path="res://SlotMachine/Assets/5.png" id="4_t6rnd"]
+[ext_resource type="AudioStream" uid="uid://3rwktfpb0jhu" path="res://SlotMachine/lose.wav" id="5_akq5w"]
+[ext_resource type="AudioStream" uid="uid://du65mshdfe76p" path="res://SlotMachine/spin.wav" id="6_u04xy"]
+[ext_resource type="AudioStream" uid="uid://cei4eddqkif1e" path="res://SlotMachine/click.wav" id="7_l7xq4"]
+[ext_resource type="Texture2D" uid="uid://blw5ao3kf6f1v" path="res://SlotMachine/Assets/ramka.png" id="9_u2wu4"]
+
+[node name="SlotMachine" type="Node2D"]
+script = ExtResource("1_e7kax")
+win_chance_percent = 50.0
+reel_sprites = Array[NodePath]([NodePath("Node2D/Slots/Slot1/Sprite2D"), NodePath("Node2D/Slots/Slot2/Sprite2D"), NodePath("Node2D/Slots/Slot3/Sprite2D")])
+spin_time = 5.0
+stop_delay = 1.0
+
+[node name="WinSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_8bidr")
+
+[node name="LoseSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5_akq5w")
+
+[node name="SpinSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("6_u04xy")
+
+[node name="ClickSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("7_l7xq4")
+
+[node name="Node2D" type="Node2D" parent="."]
+
+[node name="Slots" type="HBoxContainer" parent="Node2D"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -385.0
+offset_top = -141.0
+offset_right = 155.0
+offset_bottom = 39.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="Slot1" type="Control" parent="Node2D/Slots"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Sprite2D" type="TextureRect" parent="Node2D/Slots/Slot1"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 3.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_0ridg")
+expand_mode = 2
+stretch_mode = 5
+
+[node name="Slot2" type="Control" parent="Node2D/Slots"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Sprite2D" type="TextureRect" parent="Node2D/Slots/Slot2"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 3.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_52lsl")
+expand_mode = 2
+stretch_mode = 5
+
+[node name="Slot3" type="Control" parent="Node2D/Slots"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Sprite2D" type="TextureRect" parent="Node2D/Slots/Slot3"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 3.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("4_t6rnd")
+expand_mode = 2
+stretch_mode = 5
+
+[node name="SlotMachineTexture3" type="Sprite2D" parent="Node2D"]
+position = Vector2(-294.5, -51)
+scale = Vector2(0.282813, 0.28125)
+texture = ExtResource("9_u2wu4")
+
+[node name="SlotMachineTexture4" type="Sprite2D" parent="Node2D"]
+position = Vector2(67, -51)
+scale = Vector2(0.284375, 0.28125)
+texture = ExtResource("9_u2wu4")
+
+[node name="SlotMachineTexture5" type="Sprite2D" parent="Node2D"]
+position = Vector2(-114, -51)
+scale = Vector2(0.28125, 0.28125)
+texture = ExtResource("9_u2wu4")
