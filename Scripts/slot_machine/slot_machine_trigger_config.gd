@@ -24,8 +24,8 @@ func get_quality_from_time(time_elapsed: float) -> int:
 # Получить название качества
 func get_quality_name(quality: int) -> String:
 	match quality:
-		0: return "Обычное"
-		1: return "Редкое"
-		2: return "Эпическое"
-		3: return "Легендарное"
-		_: return "Обычное"
+		0: return "Common"
+		1: return "Rare"
+		2: return "Epic"
+		3: return "Legendary"
+		_: return "Common"

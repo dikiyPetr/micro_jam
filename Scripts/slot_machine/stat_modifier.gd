@@ -56,15 +56,6 @@ func apply_stat_change(player_stat: PlayerStat, stat_type: int, quality: int, is
 		# При поражении - уменьшаем параметр с множителем
 		actual_change = -change_value * config.get_lose_multiplier()
 	
-	# Отладочная информация
-	print("=== Изменение стата ===")
-	print("Тип стата: ", get_stat_name(stat_type))
-	print("Качество: ", get_quality_name(quality))
-	print("Базовое изменение: ", change_value)
-	print("Фактическое изменение: ", actual_change)
-	print("Минимальное значение: ", min_value)
-	print("Результат: ", "Победа" if is_win else "Поражение")
-	
 	match stat_type:
 		StatType.MAX_HP:
 			print("HP до: ", player_stat.maxHp, " / ", player_stat.currentHp)
@@ -101,29 +92,29 @@ func apply_stat_change(player_stat: PlayerStat, stat_type: int, quality: int, is
 func get_stat_name(stat_type: int) -> String:
 	match stat_type:
 		StatType.MAX_HP:
-			return "Макс. HP"
+			return "Max HP"
 		StatType.MAX_SPEED:
-			return "Скорость"
+			return "Speed"
 		StatType.DAMAGE:
-			return "Урон"
+			return "Damage"
 		StatType.FIRE_RATE:
-			return "Скорострельность"
+			return "Fire Rate"
 		_:
-			return "Неизвестно"
+			return "Unknown"
 
 # Получить название качества для отображения
 func get_quality_name(quality: int) -> String:
 	match quality:
 		Quality.COMMON:
-			return "Обычное"
+			return "Common"
 		Quality.RARE:
-			return "Редкое"
+			return "Rare"
 		Quality.EPIC:
-			return "Эпическое"
+			return "Epic"
 		Quality.LEGENDARY:
-			return "Легендарное"
+			return "Legendary"
 		_:
-			return "Неизвестно"
+			return "Unknown"
 
 # Получить цвет качества для отображения
 func get_quality_color(quality: int) -> Color:

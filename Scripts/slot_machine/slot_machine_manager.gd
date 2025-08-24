@@ -80,15 +80,6 @@ func start():
 	# Выбираем случайный стат для изменения
 	_current_stat_type = stat_modifier.get_random_stat_type()
 	
-	# Отладочная информация
-	print("=== Начало крутки ===")
-	print("Текущее время игры: ", current_time, " секунд")
-	print("Время последней крутки: ", Global.gambleStat.lastDepTime, " секунд")
-	print("Время с последней крутки: ", time_elapsed, " секунд")
-	print("Качество крутки: ", config.get_quality_name(_current_quality))
-	print("Стат для изменения: ", stat_modifier.get_stat_name(_current_stat_type))
-	print("=====================")
-	
 	# Показываем слот-машину с анимацией
 	_show_slot_machine()
 	slot_machine.start_spin()
@@ -123,7 +114,7 @@ func _update_stat_label():
 	var quality_name = config.get_quality_name(_current_quality)
 	var quality_color = stat_modifier.get_quality_color(_current_quality)
 	
-	stat_label.text = "Крутим: %s" % stat_name
+	stat_label.text = "Gamble: %s" % stat_name
 	stat_label.modulate = quality_color
 	stat_label.visible = true
 
@@ -138,21 +129,13 @@ func _on_spin_started():
 func _on_spin_finished(result: bool):
 	# Применяем изменение стата
 	if stat_modifier:
-		print("=== Применение изменения стата ===")
-		print("Результат крутки: ", "Победа" if result else "Поражение")
-		print("Тип стата: ", stat_modifier.get_stat_name(_current_stat_type))
-		var config = trigger_config as SlotMachineTriggerConfig
-		print("Качество: ", config.get_quality_name(_current_quality))
-		
+
 		var stat_info = stat_modifier.apply_stat_change(
 			Global.playerStat, 
 			_current_stat_type, 
 			_current_quality, 
 			result
 		)
-		print("Стат изменен: ", stat_info)
-		if stat_info.has("min_value"):
-			print("Минимальное значение для этого стата: ", stat_info.min_value)
 		
 		# Обновляем статы всех оружий в сцене
 		_update_all_weapons()
@@ -172,9 +155,6 @@ func _on_spin_finished(result: bool):
 	# Обновляем время последней крутки
 	var current_time = Global.gambleStat.get_current_game_time()
 	Global.gambleStat.lastDepTime = current_time
-	
-	print("Копилка сброшена: было ", coins_before, " монет, стало 0")
-	print("Время последней крутки обновлено: ", current_time, " секунд")
 	
 	# Скрываем слот-машину через небольшую задержку
 	await get_tree().create_timer(SPIN_DELAY).timeout

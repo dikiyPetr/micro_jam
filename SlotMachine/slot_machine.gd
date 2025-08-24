@@ -274,6 +274,7 @@ func _show_result():
 	# Эффект дрожи для всей слот-машины как единое целое
 	_shake_entire_machine()
 
+
 func _shake_entire_machine():
 	# Создаем tween для узла Slots
 	var tween_slots = create_tween()
