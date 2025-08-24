@@ -8,7 +8,7 @@
 [ext_resource type="AudioStream" uid="uid://3rwktfpb0jhu" path="res://SlotMachine/lose.wav" id="5_akq5w"]
 [ext_resource type="AudioStream" uid="uid://du65mshdfe76p" path="res://SlotMachine/spin.wav" id="6_u04xy"]
 [ext_resource type="AudioStream" uid="uid://cei4eddqkif1e" path="res://SlotMachine/click.wav" id="7_l7xq4"]
-[ext_resource type="Texture2D" uid="uid://blw5ao3kf6f1v" path="res://SlotMachine/Assets/ramka.png" id="9_u2wu4"]
+[ext_resource type="Texture2D" uid="uid://caky6p2u4s7hu" path="res://SlotMachine/Assets/slot_machine1.png" id="9_0ridg"]
 
 [node name="SlotMachine" type="Node2D"]
 script = ExtResource("1_e7kax")
@@ -45,6 +45,7 @@ offset_right = 155.0
 offset_bottom = 39.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_constants/separation = 40
 alignment = 1
 
 [node name="Slot1" type="Control" parent="Node2D/Slots"]
@@ -99,16 +100,6 @@ expand_mode = 2
 stretch_mode = 5
 
 [node name="SlotMachineTexture3" type="Sprite2D" parent="Node2D"]
-position = Vector2(-294.5, -51)
+position = Vector2(-113.5, -51)
 scale = Vector2(0.282813, 0.28125)
-texture = ExtResource("9_u2wu4")
-
-[node name="SlotMachineTexture4" type="Sprite2D" parent="Node2D"]
-position = Vector2(67, -51)
-scale = Vector2(0.284375, 0.28125)
-texture = ExtResource("9_u2wu4")
-
-[node name="SlotMachineTexture5" type="Sprite2D" parent="Node2D"]
-position = Vector2(-114, -51)
-scale = Vector2(0.28125, 0.28125)
-texture = ExtResource("9_u2wu4")
+texture = ExtResource("9_0ridg")

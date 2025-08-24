@@ -12,6 +12,14 @@ extends Resource
 @export_group("Множители поражения")
 @export var lose_multiplier: float = 0.5  # При поражении параметры уменьшаются в 2 раза меньше
 
+# Минимальные значения для каждого стата
+# Эти значения предотвращают падение характеристик ниже критического уровня
+@export_group("Минимальные значения")
+@export var min_hp: int = 1  # Минимальное максимальное HP игрока (текущее HP может упасть до 0)
+@export var min_speed: float = 50.0  # Минимальная скорость движения
+@export var min_damage: float = 1.0  # Минимальный урон оружия
+@export var min_fire_rate: float = 0.1  # Минимальная скорострельность
+
 # Настройки изменения статов для каждого качества
 @export_group("Обычное качество")
 @export var common_hp_change: int = 2
@@ -80,6 +88,15 @@ func get_stat_change(quality: int, stat_type: int) -> float:
 		1: return speed_change
 		2: return damage_change
 		3: return fire_rate_change
+		_: return 0.0
+
+# Получить минимальное значение для стата
+func get_min_stat_value(stat_type: int) -> float:
+	match stat_type:
+		0: return float(min_hp)
+		1: return min_speed
+		2: return min_damage
+		3: return min_fire_rate
 		_: return 0.0
 
 # Получить множитель для поражения
