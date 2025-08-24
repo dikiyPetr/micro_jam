@@ -9,7 +9,7 @@ class_name Enemy
 @export var overlap_remainder_px: float = 1.5
 
 @export_group("Spawn")
-@export var play_spawn_anim: bool = true      # проигрывать анимацию появления
+@export var play_spawn_anim: bool = true    
 @export var spawn_anim_name: StringName = &"spawn"
 @export var lock_movement_during_spawn: bool = true
 
@@ -19,7 +19,8 @@ class_name Enemy
 @onready var _hitbox: Area2D = $Hitbox
 @onready var _hurtbox: Area2D = $Hurtbox
 @onready var _sprite: AnimatedSprite2D = $Sprite2D
-
+@onready var _collision: CollisionShape2D = $CollisionShape2D
+@onready var _drop: Drop = $Drop
 var _player: Node2D
 var _dir_to_player := Vector2.ZERO
 var _stat: EnemyStat
@@ -61,6 +62,7 @@ func _on_anim_finished(name: StringName) -> void:
 func _set_combat_enabled(enabled: bool) -> void:
 	# Hitbox/Hurtbox могут быть отключены через monitoring,
 	# чтобы они не генерировали событий во время спавна
+	_collision.disabled = !enabled
 	if _hitbox:
 		_hitbox.monitoring =  enabled
 		_hitbox.monitorable = enabled
@@ -70,7 +72,6 @@ func _set_combat_enabled(enabled: bool) -> void:
 	if enabled:
 		add_to_group(Groups.Enemy)
 		_anim.play("idle")
-		_sprite.play()
 		
 func _physics_process(delta: float) -> void:
 	# При спавне (если не стопали _physics_process) просто не двигаемся
@@ -123,9 +124,6 @@ func _on_damaged(dmg: DamageInfo, hp: float, hp_prev: float) -> void:
 
 func _on_died(dmg: DamageInfo) -> void:
 	set_physics_process(false)
-	#if anim and anim.has_animation("death"):
-	#	anim.play("death")
-	#	await anim.animation_finished
 	queue_free()
 	
 func _flashOn() -> void:

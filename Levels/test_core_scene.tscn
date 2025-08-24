@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://7dkw7jdc7p6m" path="res://Prefabs/wave/wave_controller.tscn" id="1_oc0rc"]
 [ext_resource type="PackedScene" uid="uid://brot53s1d2vc6" path="res://Prefabs/Area/enemy_spawn_area.tscn" id="2_rffa8"]
 [ext_resource type="PackedScene" uid="uid://cibpipu7imcxm" path="res://Prefabs/Area/projectile_area.tscn" id="3_rffa8"]
-[ext_resource type="PackedScene" uid="uid://2pbx8tni0jj7" path="res://UI/ui.tscn" id="6_oc0rc"]
+[ext_resource type="PackedScene" path="res://UI/ui.tscn" id="6_oc0rc"]
 [ext_resource type="Script" uid="uid://vxx1mcqxplt7" path="res://Scripts/level/level_manager.gd" id="7_jyedi"]
 [ext_resource type="AudioStream" uid="uid://bbl4wl2enkhei" path="res://Assets/Sounds/Patron Saint of Heists.mp3" id="8_1l0e7"]
 
@@ -40,4 +40,3 @@ script = ExtResource("7_jyedi")
 [node name="BGMusic" type="AudioStreamPlayer2D" parent="SoundManager"]
 stream = ExtResource("8_1l0e7")
 autoplay = true
-bus = &"Music"

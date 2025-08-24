@@ -20,7 +20,6 @@ var _tick_timer: Timer
 var _rng := RandomNumberGenerator.new()
 var _alive: Array[Node2D] = []                     # только спавнённые этим спавнером
 var _active: bool = false
-var _difficulty: float = 1
 @onready var _shape: CollisionShape2D = $CollisionShape2D
 var _stat: SpawnStat
 
@@ -42,7 +41,7 @@ func _ready() -> void:
 	_tick_timer.wait_time = max(0.05, _stat.spawn_every)
 	add_child(_tick_timer)
 	_tick_timer.timeout.connect(_on_tick)
-	set_is_active(_active, _difficulty)
+	set_is_active(_active)
 	# реагируем на выход тел из области
 	body_exited.connect(_on_body_exited)
 	
@@ -118,9 +117,8 @@ func _draw() -> void:
 	draw_arc(Vector2.ZERO, radius_min, 0.0, TAU, 64, Color(0,1,0,0.6), 2.0, true)
 	draw_arc(Vector2.ZERO, radius_max, 0.0, TAU, 64, Color(0,1,0,0.35), 2.0, true)
 
-func set_is_active(is_active: bool, difficulty: float) -> void:
+func set_is_active(is_active: bool) -> void:
 	_active = is_active
-	_difficulty = difficulty
 	if _tick_timer != null:
 		if is_active: _tick_timer.start()
 		else: _tick_timer.stop()

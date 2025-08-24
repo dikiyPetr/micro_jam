@@ -19,7 +19,6 @@ enum State { IDLE, PREP, WAVE, BREAK }
 var _state: State = State.IDLE
 var _wave_index: int = 0                       # начинается с 1 у первой волны
 var _time_left: float = 0.0
-var _difficulty: float = 1.0
 
 var _timer: Timer
 var _ticker: Timer
@@ -71,9 +70,6 @@ func get_time_left() -> float:
 func get_wave_index() -> int:
 	return _wave_index
 
-func get_difficulty() -> float:
-	return _difficulty
-
 # --- внутренняя логика ---
 func _on_timer_timeout() -> void:
 	match _state:
@@ -98,12 +94,21 @@ func _set_state(s: State, duration: float) -> void:
 		_timer.start()
 	else:
 		_timer.stop()
-
+func onChangeWaveIndex(index: int) -> void:
+	if index == 1:
+		pass
+	elif index == 2:
+		Global.level2()
+	elif index == 3:
+		Global.level3()
+	elif index == 4:
+		Global.level4()
+	else:
+		Global.levelX(index)
+		
 func _begin_wave() -> void:
-
 	_wave_index += 1
-	_difficulty = 1.0 + (_wave_index - 1) * difficulty_step
-
+	onChangeWaveIndex(_wave_index)
 	# включаем спавнеры
 	_set_spawners_active(true)
 
@@ -131,4 +136,4 @@ func _set_spawners_active(active: bool) -> void:
 	#   set_active(bool)   или   set_spawning_enabled(bool)   или   set_process(bool)
 	for n in get_tree().get_nodes_in_group(Groups.Spawner):
 		if n is EnemySpawnArea:
-			n.set_is_active(active,_difficulty)
+			n.set_is_active(active)

@@ -1,5 +1,8 @@
-[gd_resource type="SpriteFrames" load_steps=9 format=3 uid="uid://dqiw7hb5k15r2"]
+[gd_resource type="SpriteFrames" load_steps=12 format=3 uid="uid://dqiw7hb5k15r2"]
 
+[ext_resource type="Texture2D" uid="uid://cyyk0k0qtbmsk" path="res://Assets/chip/3(1).png" id="1_jislw"]
+[ext_resource type="Texture2D" uid="uid://bqbd8p3su5hju" path="res://Assets/chip/3(2).png" id="1_upsv5"]
+[ext_resource type="Texture2D" uid="uid://bm71fopce3g46" path="res://Assets/chip/3(3).png" id="2_bgflp"]
 [ext_resource type="Texture2D" uid="uid://bdhh7tfj7hvjc" path="res://Assets/chip/1.png" id="2_jislw"]
 [ext_resource type="Texture2D" uid="uid://diickue08qhcq" path="res://Assets/chip/2.png" id="3_rocyi"]
 [ext_resource type="Texture2D" uid="uid://7v027xundmbm" path="res://Assets/chip/3.png" id="4_upsv5"]
@@ -13,11 +16,19 @@
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("2_jislw")
+"texture": ExtResource("1_upsv5")
 }, {
 "duration": 1.0,
-"texture": ExtResource("3_rocyi")
+"texture": ExtResource("2_bgflp")
 }, {
+"duration": 1.0,
+"texture": ExtResource("1_jislw")
+}],
+"loop": true,
+"name": &"death",
+"speed": 5.0
+}, {
+"frames": [{
 "duration": 1.0,
 "texture": ExtResource("4_upsv5")
 }, {
@@ -35,6 +46,12 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": ExtResource("9_6kmq4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_rocyi")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_jislw")
 }],
 "loop": true,
 "name": &"idle",
@@ -44,7 +61,7 @@ animations = [{
 "duration": 1.0,
 "texture": ExtResource("4_upsv5")
 }],
-"loop": false,
+"loop": true,
 "name": &"spawn",
 "speed": 5.0
 }]

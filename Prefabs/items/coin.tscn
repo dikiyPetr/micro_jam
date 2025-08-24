@@ -1,12 +1,28 @@
-[gd_scene load_steps=5 format=3 uid="uid://c4tpr8vvvw4r8"]
+[gd_scene load_steps=7 format=3 uid="uid://c4tpr8vvvw4r8"]
 
 [ext_resource type="Script" uid="uid://xn3min3ybq8g" path="res://Scripts/items/coin.gd" id="1_g0cwl"]
-[ext_resource type="Texture2D" uid="uid://vpphjfumq8r8" path="res://Assets/Tileset/item_atlas_texture.tres" id="2_f62sj"]
+[ext_resource type="Texture2D" uid="uid://cyyk0k0qtbmsk" path="res://Assets/chip/3(1).png" id="2_f62sj"]
+[ext_resource type="Texture2D" uid="uid://bqbd8p3su5hju" path="res://Assets/chip/3(2).png" id="2_p2xcf"]
+[ext_resource type="Texture2D" uid="uid://bm71fopce3g46" path="res://Assets/chip/3(3).png" id="3_f4l7e"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0foyn"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_p2xcf"]
-atlas = ExtResource("2_f62sj")
+[sub_resource type="SpriteFrames" id="SpriteFrames_mhrrc"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_p2xcf")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_f4l7e")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_f62sj")
+}],
+"loop": false,
+"name": &"death",
+"speed": 5.0
+}]
 
 [node name="Coin" type="Area2D"]
 collision_layer = 512
@@ -16,5 +32,10 @@ script = ExtResource("1_g0cwl")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_0foyn")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-texture = SubResource("AtlasTexture_p2xcf")
+[node name="Sprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(0.09, 0.09)
+sprite_frames = SubResource("SpriteFrames_mhrrc")
+animation = &"death"
+autoplay = "death"
+frame = 2
+frame_progress = 1.0
