@@ -65,8 +65,6 @@ func check_trigger_conditions() -> bool:
 func _on_coins_changed(new_amount: int, old_amount: int):
 	# Проверяем условия запуска при изменении монет
 	if check_trigger_conditions():
-		# Отладочная информация о времени
-		Global.gambleStat.debug_time_info()
 		# Запускаем слот-машину
 		start()
 

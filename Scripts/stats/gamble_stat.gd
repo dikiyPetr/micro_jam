@@ -36,13 +36,3 @@ func get_current_game_time() -> float:
 # Установить время начала игры
 func set_game_start_time():
 	gameStartTime = Time.get_unix_time_from_system()
-
-# Отладочная функция для проверки времени
-func debug_time_info():
-	print("=== Отладка времени ===")
-	print("gameStartTime: ", gameStartTime)
-	print("lastDepTime: ", lastDepTime)
-	print("totalWaveTime: ", totalWaveTime)
-	print("Текущее время игры: ", get_current_game_time())
-	print("Время с последней крутки: ", get_current_game_time() - lastDepTime)
-	print("=====================")
