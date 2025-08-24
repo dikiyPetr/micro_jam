@@ -16,6 +16,7 @@ func _ready() -> void:
 	health.max_hp=Global.playerStat.maxHp
 	health.hp=Global.playerStat.currentHp
 	_stat=Global.playerStat
+	$Sprite2D.play()
 	pass
 	
 func update() -> void:
@@ -55,6 +56,8 @@ func _read_input() -> void:
 		input_dir = move.normalized()
 		
 func _on_health_damaged(damage: Variant, hp: float, hp_prev: float) -> void:
+	$AnimationPlayer2.play('hurt')
+	$Sprite2D.play()
 	Global.playerStat.currentHp = hp
 
 func _on_health_died(damage: Variant) -> void:

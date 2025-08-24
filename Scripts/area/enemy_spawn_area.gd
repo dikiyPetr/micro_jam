@@ -127,12 +127,13 @@ func _schedule_spawn_at(world_pos: Vector2) -> void:
 	var t := get_tree().create_timer(delay, false)
 	t.timeout.connect(func(): _do_spawn(world_pos))
 
-func _do_spawn(world_pos: Vector2) -> void:
+func _do_spawn(world_pos: Vector2, ignoreSize:bool = false) -> void:
 	_cleanup_dead()
 	if enemy == null:
 		return
-	if _alive.size() >= _max_alive_current:
-		return
+	if not ignoreSize:
+		if _alive.size() >= _max_alive_current:
+			return
 	var e := enemy.instantiate()
 	if not (e is Node2D):
 		return
@@ -169,7 +170,7 @@ func set_is_active(is_active: bool) -> void:
 # ---------------------------
 
 ## Разовая «волна» сразу/за короткое время
-func spawn_burst(count: int, spread_time: float = 0.4, rmin: float = -1.0, rmax: float = -1.0, ignore_cap: bool = false) -> void:
+func spawn_burst(count: int, spread_time: float = 0, rmin: float = -1.0, rmax: float = -1.0, ignore_cap: bool = true) -> void:
 	if enemy == null or count <= 0:
 		return
 	var inner :=  rmin if rmin > 0.0 else radius_min
@@ -179,11 +180,11 @@ func spawn_burst(count: int, spread_time: float = 0.4, rmin: float = -1.0, rmax:
 			break
 		var pos := _random_point_in_custom_ring(inner, outer)
 		if spread_time <= 0.0:
-			_do_spawn(pos)
+			_do_spawn(pos,true)
 		else:
 			var d := _rng.randf_range(0.0, spread_time)
 			var t := get_tree().create_timer(d, false)
-			t.timeout.connect(func(): _do_spawn(pos))
+			t.timeout.connect(func(): _do_spawn(pos,true))
 
 func _random_point_in_custom_ring(rmin: float, rmax: float) -> Vector2:
 	var r2_min := rmin * rmin

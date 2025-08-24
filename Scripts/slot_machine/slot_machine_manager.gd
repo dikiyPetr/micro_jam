@@ -144,7 +144,7 @@ func _on_spin_finished(result: bool):
 		if not result:
 			for n in get_tree().get_nodes_in_group(Groups.Spawner):
 				if n is EnemySpawnArea:
-					n.spawn_burst(50, 0.7)
+					n.spawn_burst(Global.spawnStat.max_alive_from_this_spawner/2, 0.05)
 		
 		print("================================")
 	

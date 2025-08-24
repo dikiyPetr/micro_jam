@@ -1,9 +1,34 @@
-[gd_scene load_steps=13 format=3 uid="uid://7mxypo8i85wj"]
+[gd_scene load_steps=19 format=3 uid="uid://7mxypo8i85wj"]
 
 [ext_resource type="Script" uid="uid://baucj1xjjukah" path="res://Scripts/player/player_vl.gd" id="1_oauoo"]
 [ext_resource type="Texture2D" uid="uid://cq5sp3s64eg3c" path="res://Assets/chess/hero.png" id="2_u6gmu"]
 [ext_resource type="Script" uid="uid://o01oig0pndg5" path="res://Scripts/stats/health.gd" id="3_fevb2"]
+[ext_resource type="Texture2D" uid="uid://c2dx7s57cqb2" path="res://Assets/chess/hero_red.png" id="3_uqg0u"]
 [ext_resource type="PackedScene" uid="uid://m1t1ivvecrp1" path="res://Prefabs/weapon/weapon.tscn" id="5_uqg0u"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_r4sij"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_mi8e1"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_u6gmu")
+}],
+"loop": false,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_uqg0u")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_u6gmu")
+}],
+"loop": false,
+"name": &"hurt",
+"speed": 5.0
+}]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fevb2"]
 size = Vector2(43, 45)
@@ -12,22 +37,22 @@ size = Vector2(43, 45)
 size = Vector2(67.5, 89.527)
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_oauoo"]
-radius = 33.0
-height = 148.0
+radius = 27.0
+height = 82.0
 
 [sub_resource type="Animation" id="Animation_a81mw"]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:rotation")
+tracks/0/path = NodePath("Sprite2D:scale")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [0.0]
+"values": [Vector2(0.15, 0.15)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -44,14 +69,14 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("Sprite2D:scale")
+tracks/2/path = NodePath("Sprite2D:rotation")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(0.15, 0.15)]
+"values": [0.0]
 }
 
 [sub_resource type="Animation" id="Animation_u6gmu"]
@@ -63,14 +88,14 @@ length = 0.1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:rotation")
+tracks/0/path = NodePath("Sprite2D:scale")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.051672, 0.1),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
-"values": [0.0, 0.139626, 0.0]
+"values": [Vector2(0.15, 0.15), Vector2(0.165, 0.135), Vector2(0.15, 0.15)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -87,14 +112,14 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("Sprite2D:scale")
+tracks/2/path = NodePath("Sprite2D:rotation")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
 "times": PackedFloat32Array(0, 0.051672, 0.1),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
-"values": [Vector2(0.15, 0.15), Vector2(0.165, 0.135), Vector2(0.15, 0.15)]
+"values": [0.0, 0.139626, 0.0]
 }
 
 [sub_resource type="Animation" id="Animation_mi8e1"]
@@ -103,14 +128,14 @@ length = 0.1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:rotation")
+tracks/0/path = NodePath("Sprite2D:scale")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.051672, 0.1),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
-"values": [0.0, -0.139626, 0.0]
+"values": [Vector2(0.15, 0.15), Vector2(0.165, 0.135), Vector2(0.15, 0.15)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -127,14 +152,14 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("Sprite2D:scale")
+tracks/2/path = NodePath("Sprite2D:rotation")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
 "times": PackedFloat32Array(0, 0.051672, 0.1),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
-"values": [Vector2(0.15, 0.15), Vector2(0.165, 0.135), Vector2(0.15, 0.15)]
+"values": [0.0, -0.139626, 0.0]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_mi8e1"]
@@ -145,15 +170,54 @@ _data = {
 &"shot_right": SubResource("Animation_mi8e1")
 }
 
+[sub_resource type="Animation" id="Animation_5paoo"]
+resource_name = "hurt"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../Sprite2D:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [&"hurt", &"default"]
+}
+
+[sub_resource type="Animation" id="Animation_x5584"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../Sprite2D:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"hurt"]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_dqf5n"]
+_data = {
+&"RESET": SubResource("Animation_x5584"),
+&"hurt": SubResource("Animation_5paoo")
+}
+
 [node name="PlayerVl" type="CharacterBody2D" node_paths=PackedStringArray("health") groups=["player"]]
 z_index = 3
 collision_mask = 1024
 script = ExtResource("1_oauoo")
 health = NodePath("Health")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Sprite2D" type="AnimatedSprite2D" parent="."]
+material = SubResource("CanvasItemMaterial_r4sij")
 scale = Vector2(0.15, 0.15)
-texture = ExtResource("2_u6gmu")
+sprite_frames = SubResource("SpriteFrames_mi8e1")
+animation = &"hurt"
+autoplay = "default"
 
 [node name="Health" type="Node" parent="."]
 script = ExtResource("3_fevb2")
@@ -174,7 +238,6 @@ collision_layer = 32
 collision_mask = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
-scale = Vector2(1, 1)
 shape = SubResource("RectangleShape2D_u6gmu")
 
 [node name="Weapon" parent="." instance=ExtResource("5_uqg0u")]
@@ -185,6 +248,12 @@ shape = SubResource("CapsuleShape2D_oauoo")
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 &"": SubResource("AnimationLibrary_mi8e1")
+}
+
+[node name="AnimationPlayer2" type="AnimationPlayer" parent="."]
+root_node = NodePath("../AnimationPlayer")
+libraries = {
+&"": SubResource("AnimationLibrary_dqf5n")
 }
 
 [connection signal="damaged" from="Health" to="." method="_on_health_damaged"]
