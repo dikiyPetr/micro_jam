@@ -157,6 +157,12 @@ func _on_spin_finished(result: bool):
 		# Обновляем статы всех оружий в сцене
 		_update_all_weapons()
 		
+		# При поражении вызываем спавн врагов
+		if not result:
+			for n in get_tree().get_nodes_in_group(Groups.Spawner):
+				if n is EnemySpawnArea:
+					n.spawn_burst(50, 0.7)
+		
 		print("================================")
 	
 	# Сбрасываем количество монет в копилке
