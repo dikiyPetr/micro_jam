@@ -67,11 +67,6 @@ size_flags_horizontal = 0
 size_flags_vertical = 0
 theme_override_constants/separation = 5
 
-[node name="HPStat" type="Label" parent="Container/LeftContainer/StatsContainer"]
-layout_mode = 2
-size_flags_horizontal = 0
-text = "HP: 20"
-
 [node name="SpeedStat" type="Label" parent="Container/LeftContainer/StatsContainer"]
 layout_mode = 2
 size_flags_horizontal = 0

@@ -14,6 +14,8 @@ func setup(direction: Vector2, stat: WeaponStat) -> void:
 	_stat = stat
 	_life = stat.bulletLifetime
 	damagable.damage_amount = stat.damage
+	
+	rotation = _dir.angle() + PI/2
 
 func _physics_process(delta: float) -> void:
 	global_position += _dir * _stat.bulletSpeed * delta
