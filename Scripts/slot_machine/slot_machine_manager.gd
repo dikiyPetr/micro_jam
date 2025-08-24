@@ -18,7 +18,7 @@ const BACKGROUND_CLEAR_COLOR: Color = Color(0, 0, 0, 0)
 @onready var canvas_layer: CanvasLayer = $CanvasLayer
 
 @onready var background_overlay: ColorRect = $CanvasLayer/BackgroundOverlay
-@onready var slot_machine: Node2D = $CanvasLayer/SlotMachine
+@onready var slot_machine: Node2D = $CanvasLayer/Control/SlotMachine
 @onready var stat_label: Label = $CanvasLayer/StatLabel
 
 # Сохраняем оригинальную позицию слот машины
