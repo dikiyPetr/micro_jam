@@ -42,6 +42,7 @@ script = ExtResource("7_jyedi")
 [node name="SoundManager" type="Node2D" parent="."]
 
 [node name="BGMusic" type="AudioStreamPlayer" parent="SoundManager"]
+process_mode = 3
 stream = ExtResource("8_1l0e7")
 autoplay = true
 

@@ -3,6 +3,7 @@ class_name ProjectileArea
 @export_group("Debug")
 @export var debug_draw: bool = true
 @onready var _shape: CollisionShape2D = $CollisionShape2D
+
 func _physics_process(_delta: float) -> void:
 	if debug_draw:
 		queue_redraw()
