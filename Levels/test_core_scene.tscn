@@ -25,7 +25,6 @@ radius_max = 300.0
 [node name="ProjectileArea" parent="PlayerVl" instance=ExtResource("3_rffa8")]
 
 [node name="Camera2D" type="Camera2D" parent="PlayerVl"]
-zoom = Vector2(2, 2)
 
 [node name="UI" parent="." instance=ExtResource("6_oc0rc")]
 

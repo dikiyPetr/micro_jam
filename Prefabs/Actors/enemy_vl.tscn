@@ -39,7 +39,7 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id="Animation_34ktt"]
 resource_name = "new_animation"
-length = 4.0
+length = 2.0
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -61,12 +61,14 @@ _data = {
 }
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_edvrr"]
-radius = 8.0
-height = 20.0
+radius = 25.0
+height = 50.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_m1oif"]
+size = Vector2(50, 50)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_edvrr"]
+size = Vector2(50, 50)
 
 [node name="EnemyVl" type="CharacterBody2D"]
 collision_layer = 2
@@ -74,6 +76,7 @@ collision_mask = 2
 script = ExtResource("1_k5hu2")
 
 [node name="Sprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(0.1, 0.1)
 sprite_frames = ExtResource("2_4qfwf")
 animation = &"idle"
 
@@ -99,6 +102,7 @@ collision_layer = 4
 collision_mask = 32
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+scale = Vector2(1, 1)
 shape = SubResource("RectangleShape2D_m1oif")
 
 [node name="Hurtbox" type="Area2D" parent="."]

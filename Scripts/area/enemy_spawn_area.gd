@@ -47,7 +47,7 @@ func _ready() -> void:
 	body_exited.connect(_on_body_exited)
 	
 	if _shape and _shape.shape is CircleShape2D:
-		(_shape.shape as CircleShape2D).radius=radius_max
+		(_shape.shape as CircleShape2D).radius=radius_max+100
 		
 	set_physics_process(true)
 
@@ -105,11 +105,8 @@ func _do_spawn(world_pos: Vector2) -> void:
 
 # Удаляем врагов, вышедших за границу области
 func _on_body_exited(body: Node) -> void:
-	# ориентируемся на группу "enemies"
-	if body is Node and body.is_in_group(Groups.Enemy):
-		# безопасно попросим самоудалиться
-		(body as Node).queue_free()
-		# список сам очистится через tree_exited -> _cleanup_dead()
+	if body is Enemy:
+		body.queue_free()
 
 func _cleanup_dead() -> void:
 	_alive = _alive.filter(func(n): return is_instance_valid(n))

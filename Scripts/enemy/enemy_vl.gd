@@ -69,6 +69,8 @@ func _set_combat_enabled(enabled: bool) -> void:
 		_hurtbox.monitorable = enabled
 	if enabled:
 		add_to_group(Groups.Enemy)
+		_anim.play("idle")
+		_sprite.play()
 		
 func _physics_process(delta: float) -> void:
 	# При спавне (если не стопали _physics_process) просто не двигаемся
