@@ -92,8 +92,7 @@ func _ready():
 	
 	# Устанавливаем начальное состояние
 	_set_state(MachineState.IDLE)
-
-
+	
 func _set_state(new_state: MachineState):
 	current_state = new_state
 	state_changed.emit(new_state)
@@ -164,7 +163,6 @@ func start_spin():
 		# Если все попытки исчерпаны, принудительно делаем второй символ другим
 		if attempts >= max_attempts:
 			_results[1] = (_results[0] + 1) % symbols.size()
-		
 
 func _process(delta):
 	if not _spinning:
@@ -269,11 +267,11 @@ func _show_result():
 		if lose_sound:
 			lose_sound.play()
 		_set_state(MachineState.LOSE)
-	
+
 	# Эмитим сигнал о завершении спина
 	spin_finished.emit(win)
 	
-	# Эффект дрожи для всей слот-машины как единого целого
+	# Эффект дрожи для всей слот-машины как единое целое
 	_shake_entire_machine()
 
 func _shake_entire_machine():

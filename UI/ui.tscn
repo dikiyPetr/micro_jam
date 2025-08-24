@@ -3,13 +3,14 @@
 [ext_resource type="Texture2D" uid="uid://bl77jr05dgx5t" path="res://icon.svg" id="1_2fwl4"]
 [ext_resource type="Script" uid="uid://bis6e7hjbf6w3" path="res://Scripts/ui/ui.gd" id="1_dajm1"]
 
-[node name="UI" type="CanvasLayer" node_paths=PackedStringArray("HealthBar", "HealthBarText", "CoinBar", "CoinBarText", "WaveTime")]
+[node name="UI" type="CanvasLayer" node_paths=PackedStringArray("HealthBar", "HealthBarText", "CoinBar", "CoinBarText", "WaveTime", "StatsContainer")]
 script = ExtResource("1_dajm1")
-HealthBar = NodePath("Container/Health/Bar")
-HealthBarText = NodePath("Container/Health/Bar/Label")
+HealthBar = NodePath("Container/LeftContainer/Health/Bar")
+HealthBarText = NodePath("Container/LeftContainer/Health/Bar/Label")
 CoinBar = NodePath("Container/Coins/Bar")
 CoinBarText = NodePath("Container/Coins/Bar/Label")
 WaveTime = NodePath("Container/WaveTime")
+StatsContainer = NodePath("Container/LeftContainer/StatsContainer")
 
 [node name="Container" type="MarginContainer" parent="."]
 anchors_preset = 15
@@ -22,28 +23,34 @@ theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 10
 
-[node name="Health" type="HBoxContainer" parent="Container"]
+[node name="LeftContainer" type="VBoxContainer" parent="Container"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme_override_constants/separation = 10
+
+[node name="Health" type="HBoxContainer" parent="Container/LeftContainer"]
 clip_contents = true
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
 theme_override_constants/separation = 10
 
-[node name="Icon" type="NinePatchRect" parent="Container/Health"]
+[node name="Icon" type="NinePatchRect" parent="Container/LeftContainer/Health"]
 clip_contents = true
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 size_flags_horizontal = 0
 texture = ExtResource("1_2fwl4")
 
-[node name="Bar" type="ProgressBar" parent="Container/Health"]
+[node name="Bar" type="ProgressBar" parent="Container/LeftContainer/Health"]
 custom_minimum_size = Vector2(250, 0)
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 1
 show_percentage = false
 
-[node name="Label" type="Label" parent="Container/Health/Bar"]
+[node name="Label" type="Label" parent="Container/LeftContainer/Health/Bar"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -52,6 +59,32 @@ grow_horizontal = 2
 grow_vertical = 2
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="StatsContainer" type="VBoxContainer" parent="Container/LeftContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme_override_constants/separation = 5
+
+[node name="HPStat" type="Label" parent="Container/LeftContainer/StatsContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+text = "HP: 20"
+
+[node name="SpeedStat" type="Label" parent="Container/LeftContainer/StatsContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+text = "Speed: 220"
+
+[node name="DamageStat" type="Label" parent="Container/LeftContainer/StatsContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+text = "Damage: 1"
+
+[node name="FireRateStat" type="Label" parent="Container/LeftContainer/StatsContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+text = "Fire Rate: 3.0"
 
 [node name="Coins" type="HBoxContainer" parent="Container"]
 clip_contents = true
