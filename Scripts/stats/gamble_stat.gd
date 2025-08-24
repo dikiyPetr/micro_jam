@@ -15,3 +15,32 @@ var coins: int:
 
 var totalWaveTime = 0
 var lastDepTime = 0
+
+# Время начала игры для правильного подсчета
+var gameStartTime = 0.0
+
+# Инициализация времени при создании ресурса
+func _init():
+	lastDepTime = 0
+	totalWaveTime = 0
+	gameStartTime = 0.0
+
+# Получить текущее время игры в секундах
+func get_current_game_time() -> float:
+	if gameStartTime == 0.0:
+		return 0.0
+	return Time.get_unix_time_from_system() - gameStartTime
+
+# Установить время начала игры
+func set_game_start_time():
+	gameStartTime = Time.get_unix_time_from_system()
+
+# Отладочная функция для проверки времени
+func debug_time_info():
+	print("=== Отладка времени ===")
+	print("gameStartTime: ", gameStartTime)
+	print("lastDepTime: ", lastDepTime)
+	print("totalWaveTime: ", totalWaveTime)
+	print("Текущее время игры: ", get_current_game_time())
+	print("Время с последней крутки: ", get_current_game_time() - lastDepTime)
+	print("=====================")

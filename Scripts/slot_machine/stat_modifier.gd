@@ -39,12 +39,14 @@ func get_random_stat_type() -> int:
 	var stat_types = StatType.values()
 	return stat_types[randi() % stat_types.size()]
 
-# Применить изменение стата
+# Применить изменение стата с учетом минимальных значений
+# Минимальные значения предотвращают падение статов ниже критического уровня
 func apply_stat_change(player_stat: PlayerStat, stat_type: int, quality: int, is_win: bool) -> Dictionary:
 	if not config:
 		return {}
 		
 	var change_value = config.get_stat_change(quality, stat_type)
+	var min_value = config.get_min_stat_value(stat_type)
 	var actual_change = 0.0
 	
 	if is_win:
@@ -60,25 +62,30 @@ func apply_stat_change(player_stat: PlayerStat, stat_type: int, quality: int, is
 	print("Качество: ", get_quality_name(quality))
 	print("Базовое изменение: ", change_value)
 	print("Фактическое изменение: ", actual_change)
+	print("Минимальное значение: ", min_value)
 	print("Результат: ", "Победа" if is_win else "Поражение")
 	
 	match stat_type:
 		StatType.MAX_HP:
 			print("HP до: ", player_stat.maxHp, " / ", player_stat.currentHp)
-			player_stat.maxHp += int(actual_change)
-			player_stat.currentHp += int(actual_change) # Также изменяем текущее HP
+			# Минимальное значение применяется только к максимальному HP
+			var new_max_hp = max(player_stat.maxHp + int(actual_change), int(min_value))
+			# Текущее HP может упасть до 0 (смерть игрока)
+			var new_current_hp = player_stat.currentHp + int(actual_change)
+			player_stat.maxHp = new_max_hp
+			player_stat.currentHp = new_current_hp
 			print("HP после: ", player_stat.maxHp, " / ", player_stat.currentHp)
 		StatType.MAX_SPEED:
 			print("Скорость до: ", player_stat.maxSpeed)
-			player_stat.maxSpeed += actual_change
+			player_stat.maxSpeed = max(player_stat.maxSpeed + actual_change, min_value)
 			print("Скорость после: ", player_stat.maxSpeed)
 		StatType.DAMAGE:
 			print("Урон до: ", Global.weaponStat.damage)
-			Global.weaponStat.damage += actual_change
+			Global.weaponStat.damage = max(Global.weaponStat.damage + actual_change, min_value)
 			print("Урон после: ", Global.weaponStat.damage)
 		StatType.FIRE_RATE:
 			print("Скорострельность до: ", Global.weaponStat.fire_rate)
-			Global.weaponStat.fire_rate += actual_change
+			Global.weaponStat.fire_rate = max(Global.weaponStat.fire_rate + actual_change, min_value)
 			print("Скорострельность после: ", Global.weaponStat.fire_rate)
 	
 	print("=====================")
@@ -87,7 +94,8 @@ func apply_stat_change(player_stat: PlayerStat, stat_type: int, quality: int, is
 		"stat_type": stat_type,
 		"quality": quality,
 		"change": actual_change,
-		"is_win": is_win
+		"is_win": is_win,
+		"min_value": min_value
 	}
 
 # Получить название стата для отображения

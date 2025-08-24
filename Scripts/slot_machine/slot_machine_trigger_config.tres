@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="SlotMachineTriggerConfig" load_steps=2 format=3 uid="uid://bqxv8yqxqxqxq"]
+
+[ext_resource type="Script" uid="uid://chwmwf46r7pc0" path="res://Scripts/slot_machine/slot_machine_trigger_config.gd" id="1_0x0x0"]
+
+[resource]
+script = ExtResource("1_0x0x0")
+coins_required = 10
+legendary_time_threshold = 8.0
+epic_time_threshold = 15.0
+rare_time_threshold = 30.0
+common_time_threshold = 30.0
