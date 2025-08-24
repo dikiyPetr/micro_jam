@@ -214,11 +214,13 @@ collision_mask = 2
 script = ExtResource("1_k5hu2")
 
 [node name="Shadow" type="Sprite2D" parent="."]
+z_index = -1
 position = Vector2(2, 1)
 scale = Vector2(0.0218333, 0.025)
 texture = ExtResource("3_33013")
 
 [node name="Sprite2D" type="AnimatedSprite2D" parent="."]
+z_index = 1
 scale = Vector2(0.1, 0.1)
 sprite_frames = ExtResource("2_4qfwf")
 animation = &"idle"

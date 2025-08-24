@@ -14,7 +14,6 @@
 [node name="TestCoreScene" type="Node2D"]
 
 [node name="WaveController" parent="." instance=ExtResource("1_oc0rc")]
-wave_duration = 15.0
 
 [node name="Pool" type="Node2D" parent="." groups=["pool"]]
 position = Vector2(2, 0)
