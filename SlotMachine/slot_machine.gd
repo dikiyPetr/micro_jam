@@ -245,7 +245,7 @@ func _stop_effect():
 
 func _show_result():
 	# Символы уже установлены в _stop_next_slot(), поэтому здесь только проверяем результат
-	
+	$SpinSound.stop()
 	# Проверка выигрыша (если все одинаковые)
 	var first = _results[0]
 	var win = true

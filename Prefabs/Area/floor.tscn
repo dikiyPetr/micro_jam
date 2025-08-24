@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://bbsga7adf2pid"]
 
-[ext_resource type="Texture2D" uid="uid://co32c6gwas5q5" path="res://Assets/floor/floor.jpg" id="1_dkmfh"]
+[ext_resource type="Texture2D" uid="uid://ba3xm3mn0pr14" path="res://Assets/floor/back.png" id="1_dkmfh"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dkmfh"]
 size = Vector2(2048, 1152)
@@ -32,7 +32,8 @@ color = Color(0, 0, 0, 1)
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 z_index = -2
-scale = Vector2(2, 2)
+position = Vector2(-32, -18)
+scale = Vector2(0.516667, 0.516667)
 texture = ExtResource("1_dkmfh")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

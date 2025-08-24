@@ -11,7 +11,7 @@ projectile = ExtResource("2_mbn6f")
 enemy = 1
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-scale = Vector2(0.16, 0.16)
+scale = Vector2(0.2, 0.2)
 texture = ExtResource("3_1nuj0")
 
 [node name="ShotSound" type="AudioStreamPlayer2D" parent="." groups=["slot_machine"]]

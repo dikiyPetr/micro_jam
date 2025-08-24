@@ -9,6 +9,8 @@ func _ready():
 	print("Время начала игры установлено")
 
 func set_gambling() -> bool:
+	if state == State.GameOver:
+		return false
 	get_tree().paused = true
 	state=State.Gambling
 	return true
@@ -19,6 +21,8 @@ func set_playing() -> bool:
 	return true
 
 func set_pause() -> bool:
+	if state == State.Gambling ||  state == State.GameOver:
+		return false
 	get_tree().paused = true
 	state=State.Playing
 	return true

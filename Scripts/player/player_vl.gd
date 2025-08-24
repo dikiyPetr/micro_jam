@@ -17,6 +17,10 @@ func _ready() -> void:
 	health.hp=Global.playerStat.currentHp
 	_stat=Global.playerStat
 	pass
+	
+func update() -> void:
+	health.max_hp = Global.playerStat.maxHp
+	health.hp = Global.playerStat.currentHp
 
 func _physics_process(delta: float) -> void:
 	_read_input()
@@ -51,10 +55,13 @@ func _read_input() -> void:
 		input_dir = move.normalized()
 		
 func _on_health_damaged(damage: Variant, hp: float, hp_prev: float) -> void:
-	Global.playerStat.currentHp=health.hp
+	Global.playerStat.currentHp = hp
 
 func _on_health_died(damage: Variant) -> void:
 	Global.playerStat.currentHp=health.hp
+	if Global.playerStat.currentHp == 0:
+		$"../GameManager".set_game_over();
+		$"../DeathMenu".showMenu()
 	
 func _on_health_healed(amount: float, hp: float) -> void:
 	pass # Replace with function body.

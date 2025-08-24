@@ -71,13 +71,12 @@ func apply_stat_change(player_stat: PlayerStat, stat_type: int, quality: int, is
 			# Минимальное значение применяется только к максимальному HP
 			var new_max_hp = max(player_stat.maxHp + int(actual_change), int(min_value))
 			# Текущее HP может упасть до 0 (смерть игрока)
-			var new_current_hp = player_stat.currentHp + int(actual_change)
 			player_stat.maxHp = new_max_hp
-			player_stat.currentHp = new_current_hp
 			print("HP после: ", player_stat.maxHp, " / ", player_stat.currentHp)
 		StatType.MAX_SPEED:
 			print("Скорость до: ", player_stat.maxSpeed)
 			player_stat.maxSpeed = max(player_stat.maxSpeed + actual_change, min_value)
+			Global.weaponStat.bulletSpeed =  max(WeaponStat.new().bulletSpeed + player_stat.maxSpeed-PlayerStat.new().maxSpeed, Global.weaponStat.bulletSpeed)
 			print("Скорость после: ", player_stat.maxSpeed)
 		StatType.DAMAGE:
 			print("Урон до: ", Global.weaponStat.damage)

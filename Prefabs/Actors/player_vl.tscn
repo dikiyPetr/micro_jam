@@ -6,14 +6,14 @@
 [ext_resource type="PackedScene" uid="uid://m1t1ivvecrp1" path="res://Prefabs/weapon/weapon.tscn" id="5_uqg0u"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fevb2"]
-size = Vector2(30, 30)
+size = Vector2(43, 45)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_u6gmu"]
-size = Vector2(35, 50)
+size = Vector2(67.5, 89.527)
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_oauoo"]
-radius = 19.0
-height = 76.0
+radius = 33.0
+height = 148.0
 
 [sub_resource type="Animation" id="Animation_a81mw"]
 length = 0.001
@@ -174,6 +174,7 @@ collision_layer = 32
 collision_mask = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
+scale = Vector2(1, 1)
 shape = SubResource("RectangleShape2D_u6gmu")
 
 [node name="Weapon" parent="." instance=ExtResource("5_uqg0u")]

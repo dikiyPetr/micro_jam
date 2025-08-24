@@ -6,8 +6,8 @@ const SlotMachineTriggerConfig = preload("res://Scripts/slot_machine/slot_machin
 # Константы для анимаций
 const FALL_DISTANCE: float = 200.0
 const FALL_DURATION: float = 0.8
-const FADE_DURATION: float = 0.5
-const BACKGROUND_FADE_DURATION: float = 0.8
+const FADE_DURATION: float = 0.1
+const BACKGROUND_FADE_DURATION: float = 0.1
 const SPIN_DELAY: float = 1.0
 
 # Цвета
@@ -128,29 +128,12 @@ func _update_stat_label():
 	stat_label.visible = true
 
 func _hide_slot_machine():
-	# Скрываем слот-машину и затенение
-	var tween = create_tween()
-	tween.set_parallel(true)
-	
-	# Анимация взлета слот-машины с ElasticEaseOut
-	tween.tween_property(slot_machine, "position", original_position + Vector2(0, -FALL_DISTANCE), FALL_DURATION).set_ease(Tween.EASE_IN).set_trans(Tween.TRANS_ELASTIC)
-	
-	# Анимация исчезновения прозрачности (синхронизирована с взлетом)
-	tween.tween_property(slot_machine, "modulate:a", 0.0, FALL_DURATION).set_ease(Tween.EASE_IN)
-	
-	# Анимация осветления фона
-	tween.tween_property(background_overlay, "color", BACKGROUND_CLEAR_COLOR, BACKGROUND_FADE_DURATION)
-	
-	# Скрываем label с характеристикой
-	stat_label.visible = false
-	
-	# Ждем завершения анимации перед скрытием CanvasLayer
-	await tween.finished
+	$"../GameManager".set_playing()
 	canvas_layer.visible = false
 
 func _on_spin_started():
-	# Паузим игру при начале спина
-	get_tree().paused = true
+	$"../GameManager".set_gambling()
+	
 
 func _on_spin_finished(result: bool):
 	# Применяем изменение стата
@@ -191,9 +174,6 @@ func _on_spin_finished(result: bool):
 	await get_tree().create_timer(SPIN_DELAY).timeout
 	_hide_slot_machine()
 
-	# Возобновляем игру при завершении спина
-	get_tree().paused = false
-
 # Обновить статы всех оружий в сцене
 func _update_all_weapons() -> void:
 	# Ищем все оружия в сцене
@@ -216,6 +196,7 @@ func _update_player_character_stats() -> void:
 	# Ищем игрока с PlayerController
 	var players = get_tree().get_nodes_in_group("player")
 	for player in players:
+		(player as Player).update()
 		if player.has_method("_get_Stat"):
 			var char_stat = player._get_Stat()
 			if char_stat and char_stat.has_method("update_from_player_stat"):

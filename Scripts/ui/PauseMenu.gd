@@ -31,6 +31,8 @@ func _on_restart_pressed() -> void:
 		get_tree().reload_current_scene()
 
 func toggle_pause() -> void:
+	if _gameManager.state == GameManager.State.Gambling || _gameManager.state == GameManager.State.GameOver:
+		return
 	if get_tree().paused:
 		if _gameManager.set_playing():
 			_resume_game()
