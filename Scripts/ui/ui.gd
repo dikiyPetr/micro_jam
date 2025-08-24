@@ -12,11 +12,31 @@ func _process(delta):
 	HealthBar.value = Global.playerStat.currentHp;
 	HealthBarText.text = Global.formatHP();
 
-	var tier = 'Uncommon';
-	var tierSize = 100;
+	# Определяем качество крутки на основе времени
+	var current_time = Global.gambleStat.get_current_game_time()
+	var time_elapsed = current_time - Global.gambleStat.lastDepTime
+	
+	# Получаем конфигурацию триггера слот-машины
+	var trigger_config = get_node("../SlotMachineManager").trigger_config
+	var quality = 0
+	var quality_name = "Common"
+	var quality_color = Color.WHITE
+	
+	if trigger_config:
+		quality = trigger_config.get_quality_from_time(time_elapsed)
+		quality_name = trigger_config.get_quality_name(quality)
+		# Получаем цвет качества из stat_modifier
+		var slot_manager = get_node("../SlotMachineManager")
+		if slot_manager and slot_manager.stat_modifier:
+			quality_color = slot_manager.stat_modifier.get_quality_color(quality)
+	
+	var tierSize = Global.gambleStat.coins_required;
 	CoinBar.max_value = tierSize;
 	CoinBar.value = Global.gambleStat.coins;
-	CoinBarText.text = Global.formatTier(tier, tierSize);
+	
+	# Отображаем качество крутки
+	CoinBarText.text = quality_name
+	CoinBarText.modulate = quality_color
 
 	WaveTime.text ='%d$' % Global.gambleStat.totalCoins
 	
