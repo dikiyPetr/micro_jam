@@ -8,6 +8,7 @@ class_name Player
 @export var team: Teams.Values
 @export var health: Health
 
+@onready var anim: AnimationPlayer = $AnimationPlayer
 var input_dir: Vector2 = Vector2.ZERO
 var _stat: PlayerStat
 
@@ -32,9 +33,9 @@ func _physics_process(delta: float) -> void:
 
 func _process(delta: float) -> void:
 	if velocity.x > 0.1:
-		$Sprite2D.flip_h = false
-	elif velocity.x < -0.1:
 		$Sprite2D.flip_h = true
+	elif velocity.x < -0.1:
+		$Sprite2D.flip_h = false
 
 func _read_input() -> void:
 	# используем имена действий из твоего PlayerInput
@@ -65,4 +66,12 @@ func _on_health_invuln_started() -> void:
 	pass # Replace with function body.
 
 func _on_health_revived(hp: float) -> void:
+	pass # Replace with function body.
+
+func _on_weapon_on_shot(dir: Vector2) -> void:
+	var isShotLeft=dir.x<0
+	if isShotLeft:
+		anim.play("shot_left")
+	else:
+		anim.play("shot_right")
 	pass # Replace with function body.

@@ -1,12 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://m1t1ivvecrp1"]
+[gd_scene load_steps=4 format=3 uid="uid://m1t1ivvecrp1"]
 
 [ext_resource type="Script" uid="uid://dm2p0osvojhlx" path="res://Scripts/weapon/weapon.gd" id="1_snd20"]
 [ext_resource type="PackedScene" uid="uid://cwa0c2k1jc6mr" path="res://Prefabs/projectile/projectile.tscn" id="2_mbn6f"]
-[ext_resource type="Texture2D" uid="uid://c52barm6au7bw" path="res://Assets/Enemy/ghost_skeleton_main_flaten-Sheet.png" id="3_1nuj0"]
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_hs6qg"]
-atlas = ExtResource("3_1nuj0")
-region = Rect2(375, 395, 34, 10)
+[ext_resource type="Texture2D" uid="uid://dpkdrjq0ao163" path="res://Assets/pricel/pricel1 bubny.png" id="3_1nuj0"]
 
 [node name="Weapon" type="Node2D"]
 script = ExtResource("1_snd20")
@@ -14,5 +10,5 @@ projectile = ExtResource("2_mbn6f")
 enemy = 1
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-scale = Vector2(0.600001, 0.600001)
-texture = SubResource("AtlasTexture_hs6qg")
+scale = Vector2(0.12, 0.12)
+texture = ExtResource("3_1nuj0")

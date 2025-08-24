@@ -1,32 +1,157 @@
-[gd_scene load_steps=9 format=3 uid="uid://7mxypo8i85wj"]
+[gd_scene load_steps=13 format=3 uid="uid://7mxypo8i85wj"]
 
-[ext_resource type="Texture2D" uid="uid://cntyrgpuor2pd" path="res://Assets/Player/idle.png" id="1_gn08r"]
 [ext_resource type="Script" uid="uid://baucj1xjjukah" path="res://Scripts/player/player_vl.gd" id="1_oauoo"]
+[ext_resource type="Texture2D" uid="uid://cq5sp3s64eg3c" path="res://Assets/chess/hero.png" id="2_u6gmu"]
 [ext_resource type="Script" uid="uid://o01oig0pndg5" path="res://Scripts/stats/health.gd" id="3_fevb2"]
 [ext_resource type="PackedScene" uid="uid://m1t1ivvecrp1" path="res://Prefabs/weapon/weapon.tscn" id="5_uqg0u"]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_oauoo"]
-radius = 8.0
-height = 16.0
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_fevb2"]
-atlas = ExtResource("1_gn08r")
-region = Rect2(35, 33, 11, 14)
-
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fevb2"]
-size = Vector2(13.5, 15.5)
+size = Vector2(30, 30)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_u6gmu"]
+size = Vector2(35, 50)
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_oauoo"]
+radius = 15.0
+height = 50.0
+
+[sub_resource type="Animation" id="Animation_u6gmu"]
+resource_name = "new_animation"
+
+[sub_resource type="Animation" id="Animation_a81mw"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0.1, 0.1)]
+}
+
+[sub_resource type="Animation" id="Animation_mi8e1"]
+resource_name = "shot"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.051672, 0.1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [0.0, -0.139626, 0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.051672, 0.1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(-6, 0), Vector2(0, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.051672, 0.1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(0.1, 0.1), Vector2(0.11, 0.09), Vector2(0.1, 0.1)]
+}
+
+[sub_resource type="Animation" id="Animation_uqg0u"]
+resource_name = "shot"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.051672, 0.1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [0.0, 0.139626, 0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.051672, 0.1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(6, 0), Vector2(0, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.051672, 0.1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(0.1, 0.1), Vector2(0.11, 0.09), Vector2(0.1, 0.1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_mi8e1"]
+_data = {
+&"RESET": SubResource("Animation_a81mw"),
+&"idle": SubResource("Animation_u6gmu"),
+&"shot_left": SubResource("Animation_uqg0u"),
+&"shot_right": SubResource("Animation_mi8e1")
+}
 
 [node name="PlayerVl" type="CharacterBody2D" node_paths=PackedStringArray("health") groups=["player"]]
 script = ExtResource("1_oauoo")
 health = NodePath("Health")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("CapsuleShape2D_oauoo")
-
 [node name="Sprite2D" type="Sprite2D" parent="."]
-texture = SubResource("AtlasTexture_fevb2")
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("2_u6gmu")
 
 [node name="Health" type="Node" parent="."]
 script = ExtResource("3_fevb2")
@@ -50,9 +175,18 @@ shape = SubResource("RectangleShape2D_u6gmu")
 
 [node name="Weapon" parent="." instance=ExtResource("5_uqg0u")]
 
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_oauoo")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_mi8e1")
+}
+
 [connection signal="damaged" from="Health" to="." method="_on_health_damaged"]
 [connection signal="died" from="Health" to="." method="_on_health_died"]
 [connection signal="healed" from="Health" to="." method="_on_health_healed"]
 [connection signal="invuln_ended" from="Health" to="." method="_on_health_invuln_ended"]
 [connection signal="invuln_started" from="Health" to="." method="_on_health_invuln_started"]
 [connection signal="revived" from="Health" to="." method="_on_health_revived"]
+[connection signal="onShot" from="Weapon" to="." method="_on_weapon_on_shot"]

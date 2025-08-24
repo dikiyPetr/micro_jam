@@ -9,12 +9,11 @@ class_name Weapon
 @export_group("Fire params")
 @export var auto_fire: bool = true
 
-@export_group("Orbit visuals") # ⬅️ новое
-@export var orbit_radius: float = 20.0          # радиус облёта вокруг игрока
-@export var orbit_height_offset: float = 0.0 
-@export var muzzle_offset: float = 10.0      # сдвиг по Y (если нужно поднять/опустить)
 @export_range(0.0, 1.0, 0.01) var aim_smooth: float = 0.18
-@export var flip_vertically_when_left: bool = true
+@export var flip_vertically_when_left: bool = false
+@export var sprite_forward: Vector2 = Vector2.UP  
+
+signal onShot(dir: Vector2)
 
 @onready var sprite: Sprite2D = $Sprite2D
 var stat: WeaponStat
@@ -54,6 +53,7 @@ func _fire_at_with_base_dir(base_dir: Vector2) -> void:
 	var count: int = max(1, stat.bullets_per_shot)
 	for i in count:
 		var dir := _apply_spread(base_dir, stat.spread_deg)
+		onShot.emit(dir)
 		_spawn_projectile(dir)
 
 func _apply_spread(dir: Vector2, spread: float) -> Vector2:
@@ -69,7 +69,7 @@ func _spawn_projectile(dir: Vector2) -> void:
 		# базовая орбита (оружие вокруг игрока)
 		var spawn_pos := global_position + _dir_to_orbit_offset(dir)
 		# смещаем чуть дальше вдоль направления (к дулу)
-		spawn_pos += dir.normalized() * muzzle_offset
+		spawn_pos += dir.normalized()
 
 		p.global_position = spawn_pos
 		p.setup(dir,stat)
@@ -97,27 +97,22 @@ func _update_sprite_aim(dir: Vector2, instant: bool) -> void:
 	if sprite == null or dir == Vector2.ZERO:
 		return
 
-	# Целевая позиция спрайта = точка на окружности вокруг игрока (+ опц. смещение по высоте)
-	var desired_local_pos := _dir_to_orbit_offset(dir)  # локально относительно Weapon (который сидит на игроке)
+	var desired_local_pos := _dir_to_orbit_offset(dir)
 
-	# Плавное приближение к целевой позиции
 	if instant or aim_smooth <= 0.0:
 		sprite.position = desired_local_pos
 	else:
 		sprite.position = sprite.position.lerp(desired_local_pos, aim_smooth)
 
-	# Поворот носом по направлению стрельбы
-	var target_angle := dir.angle()
+	var target_angle := sprite_forward.angle_to(dir)
+
 	if instant or aim_smooth <= 0.0:
 		sprite.rotation = target_angle
 	else:
 		sprite.rotation = lerp_angle(sprite.rotation, target_angle, aim_smooth)
 
-	# Вертикальный флип для левой полусферы (чтобы не была «вверх ногами»)
 	if flip_vertically_when_left:
-		var ang := wrapf(target_angle, -PI, PI)
-		sprite.flip_v = abs(ang) > PI * 0.5
+		sprite.flip_v = dir.x < 0.0
 
-# перевод направления в точку орбиты
 func _dir_to_orbit_offset(dir: Vector2) -> Vector2:
-	return dir.normalized() * orbit_radius + Vector2(0.0, orbit_height_offset)
+	return dir.normalized()

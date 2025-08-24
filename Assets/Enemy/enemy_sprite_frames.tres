@@ -42,7 +42,7 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("2_jislw")
+"texture": ExtResource("4_upsv5")
 }],
 "loop": false,
 "name": &"spawn",

@@ -34,6 +34,18 @@ tracks/1/keys = {
 "update": 0,
 "values": [Vector2(0, 0)]
 }
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Shadow:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(0.1),
+"update": 0,
+"values": [Vector2(0.0218333, 0.025)]
+}
 
 [sub_resource type="Animation" id="Animation_4uocp"]
 length = 0.001
@@ -64,7 +76,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("Sprite2D2:scale")
+tracks/2/path = NodePath("Shadow:scale")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -104,7 +116,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("Sprite2D2:scale")
+tracks/2/path = NodePath("Shadow:scale")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -136,7 +148,7 @@ collision_layer = 2
 collision_mask = 2
 script = ExtResource("1_k5hu2")
 
-[node name="Sprite2D2" type="Sprite2D" parent="."]
+[node name="Shadow" type="Sprite2D" parent="."]
 position = Vector2(2, 1)
 scale = Vector2(0.0218333, 0.025)
 texture = ExtResource("3_33013")
@@ -153,7 +165,6 @@ libraries = {
 autoplay = "spawn"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
 shape = SubResource("CapsuleShape2D_edvrr")
 
 [node name="Health" type="Node" parent="."]
@@ -165,7 +176,6 @@ script = ExtResource("4_edvrr")
 knockbackFrom = NodePath("..")
 
 [node name="Hitbox" type="Area2D" parent="."]
-visible = false
 collision_layer = 4
 collision_mask = 32
 
@@ -174,7 +184,6 @@ scale = Vector2(1, 1)
 shape = SubResource("RectangleShape2D_m1oif")
 
 [node name="Hurtbox" type="Area2D" parent="."]
-visible = false
 collision_layer = 8
 collision_mask = 16
 

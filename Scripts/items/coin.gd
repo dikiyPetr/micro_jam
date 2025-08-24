@@ -16,7 +16,7 @@ func _physics_process(delta: float) -> void:
 	if _stat.magnet_radius > 0.0 and is_instance_valid(_target):
 		var to_p := _target.global_position - global_position
 		if to_p.length_squared() <= _stat.magnet_radius * _stat.magnet_radius:
-			global_position += to_p.normalized() * _stat.speed * delta
+			global_position += to_p.normalized() * _stat.magnet_speed * delta
 
 	# Таймер жизни
 	if _stat.lifetime > 0.0:
@@ -27,5 +27,5 @@ func _physics_process(delta: float) -> void:
 func _on_area_entered(a: Area2D) -> void:
 	if not a.is_in_group(Groups.Collector):
 		return
-	Global.gambleStat.coins = Global.gambleStat.coins + 1
+	Global.gambleStat.coins = Global.gambleStat.coins + _stat.coin_value
 	queue_free()

@@ -16,6 +16,23 @@ func reset() -> void:
 	dropStat = DropStat.new()
 	spawnStat = SpawnStat.new()
 	
+func level2() -> void:
+	enemyStat.level2()
+	spawnStat.level2()
+	
+func level3() -> void:
+	enemyStat.level3()
+	spawnStat.level3()
+
+func level4() -> void:
+	enemyStat.level4()
+	spawnStat.level4()
+
+# умножение статов на уровень
+func levelX(x: float) -> void:
+	enemyStat.levelX(x)
+	spawnStat.levelX(x)
+	
 func formatHP() -> String:
 	var fstr = '%d / %d';
 	return fstr % [playerStat.currentHp, playerStat.maxHp]

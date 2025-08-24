@@ -8,9 +8,7 @@ signal break_ended(next_index: int)    # индекс следующей вол�
 signal tick(state: WaveController.State, time_left: float)  # раз в сек: состояние и оставшееся время
 
 @export_group("Timing")
-@export var start_delay: float = 0.0           # задержка перед самой первой волной
-@export var wave_duration: float = 30.0        # длительность волны
-@export var break_duration: float = 15.0       # длительность перерыва
+@export var start_delay: float = 0.0           # задержка перед самой первой волной   # длительность перерыва
 @export var auto_start: bool = true
 @export var tick_interval: float = 1.0         # частота сигнала tick (0 = выключить)
 
@@ -25,8 +23,10 @@ var _difficulty: float = 1.0
 
 var _timer: Timer
 var _ticker: Timer
+var _stat: WaveStat
 
 func _ready() -> void:
+	_stat = Global.waveStat
 	_timer = Timer.new()
 	_timer.one_shot = true
 	add_child(_timer)
@@ -107,7 +107,7 @@ func _begin_wave() -> void:
 	# включаем спавнеры
 	_set_spawners_active(true)
 
-	_set_state(State.WAVE, max(0.1, wave_duration))
+	_set_state(State.WAVE, max(0.1, _stat.wave_duration))
 	wave_started.emit(_wave_index)
 
 func _end_wave() -> void:
@@ -115,8 +115,8 @@ func _end_wave() -> void:
 	_set_spawners_active(false)
 	wave_ended.emit(_wave_index)
 
-	if break_duration > 0.0:
-		_set_state(State.BREAK, break_duration)
+	if _stat.break_duration > 0.0:
+		_set_state(State.BREAK, _stat.break_duration)
 		break_started.emit(_wave_index)
 	else:
 		# сразу следующая волна
