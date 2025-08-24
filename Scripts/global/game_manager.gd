@@ -3,18 +3,22 @@ class_name GameManager
 enum State { Playing, Pause, Gambling, GameOver}
 var state:State = State.Playing
 
-func set_gambling() -> void:
+func set_gambling() -> bool:
 	get_tree().paused = true
 	state=State.Gambling
+	return true
 
-func set_playing() -> void:
+func set_playing() -> bool:
 	get_tree().paused = false
 	state=State.Playing
+	return true
 
-func set_pause() -> void:
+func set_pause() -> bool:
 	get_tree().paused = true
 	state=State.Playing
-
-func set_game_over() -> void:
+	return true
+	
+func set_game_over() -> bool:
 	get_tree().paused = true
 	state=State.GameOver
+	return true

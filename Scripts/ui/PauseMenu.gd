@@ -4,10 +4,12 @@ class_name PauseMenu
 @export var ContinueButton: Button
 @export var RestartButton: Button
 
+var _gameManager: GameManager
+
 func _ready() -> void:
 	# UI должен жить в паузе
 	process_mode = Node.PROCESS_MODE_ALWAYS
-
+	_gameManager = $"../GameManager"
 	hide_menu()
 
 	if ContinueButton:
@@ -24,23 +26,24 @@ func _on_continue_pressed() -> void:
 	_resume_game()
 
 func _on_restart_pressed() -> void:
-	get_tree().paused = false
-	Global.reset()
-	get_tree().reload_current_scene()
+	if _gameManager.set_playing():
+		Global.reset()
+		get_tree().reload_current_scene()
 
 func toggle_pause() -> void:
 	if get_tree().paused:
-		_resume_game()
+		if _gameManager.set_playing():
+			_resume_game()
 	else:
-		_pause_game()
+		if _gameManager.set_pause():
+			_pause_game()
 
 func _pause_game() -> void:
-	get_tree().paused = true
 	show_menu()
 
 func _resume_game() -> void:
-	get_tree().paused = false
-	hide_menu()
+	if _gameManager.set_playing():
+		hide_menu()
 
 func show_menu() -> void:
 	visible = true
