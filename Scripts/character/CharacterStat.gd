@@ -12,3 +12,9 @@ class_name CharacterStat
 @export var Gravity: float = 900.0
 @export var CoyoteTime: float = 0.12
 @export var JumpBufferTime: float = 0.12
+
+# Обновить статы из PlayerStat
+func update_from_player_stat(player_stat: PlayerStat) -> void:
+	MaxSpeed = player_stat.maxSpeed
+	Accel = player_stat.acceleration
+	Decel = player_stat.friction
